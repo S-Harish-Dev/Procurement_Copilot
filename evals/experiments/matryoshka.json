@@ -1,0 +1,126 @@
+{
+  "id": "matryoshka",
+  "title": "Matryoshka dimensions (nomic, dense only)",
+  "kind": "matryoshka",
+  "takeaway": "256 dims keep recall@20 at 0.872 vs 0.895 at 768 for a third of the memory",
+  "created_at": "2026-10-30T18:23:07Z",
+  "data": {
+    "curves": [
+      {
+        "name": "recall@20",
+        "points": [
+          [
+            768,
+            0.895
+          ],
+          [
+            512,
+            0.885
+          ],
+          [
+            384,
+            0.883
+          ],
+          [
+            256,
+            0.872
+          ],
+          [
+            128,
+            0.856
+          ],
+          [
+            64,
+            0.759
+          ]
+        ]
+      },
+      {
+        "name": "MRR",
+        "points": [
+          [
+            768,
+            0.679
+          ],
+          [
+            512,
+            0.676
+          ],
+          [
+            384,
+            0.671
+          ],
+          [
+            256,
+            0.632
+          ],
+          [
+            128,
+            0.586
+          ],
+          [
+            64,
+            0.506
+          ]
+        ]
+      }
+    ],
+    "x_label": "dimensions",
+    "y_label": "score",
+    "chosen": {
+      "x": 768,
+      "y": 0.895,
+      "label": "production"
+    },
+    "table": [
+      {
+        "dims": 768,
+        "index_mb_fp32": 34.8,
+        "recall@20": 0.895,
+        "hit@5": 0.816,
+        "mrr": 0.679,
+        "ndcg@10": 0.712
+      },
+      {
+        "dims": 512,
+        "index_mb_fp32": 23.2,
+        "recall@20": 0.885,
+        "hit@5": 0.822,
+        "mrr": 0.676,
+        "ndcg@10": 0.708
+      },
+      {
+        "dims": 384,
+        "index_mb_fp32": 17.4,
+        "recall@20": 0.883,
+        "hit@5": 0.805,
+        "mrr": 0.671,
+        "ndcg@10": 0.705
+      },
+      {
+        "dims": 256,
+        "index_mb_fp32": 11.6,
+        "recall@20": 0.872,
+        "hit@5": 0.778,
+        "mrr": 0.632,
+        "ndcg@10": 0.669
+      },
+      {
+        "dims": 128,
+        "index_mb_fp32": 5.8,
+        "recall@20": 0.856,
+        "hit@5": 0.746,
+        "mrr": 0.586,
+        "ndcg@10": 0.632
+      },
+      {
+        "dims": 64,
+        "index_mb_fp32": 2.9,
+        "recall@20": 0.759,
+        "hit@5": 0.6,
+        "mrr": 0.506,
+        "ndcg@10": 0.543
+      }
+    ]
+  }
+}

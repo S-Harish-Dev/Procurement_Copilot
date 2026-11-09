@@ -1,0 +1,11 @@
+.git
+gateway/target
+brain/.venv
+**/__pycache__
+data
+models
+web
+docs
+evals
+infra
+snapshots

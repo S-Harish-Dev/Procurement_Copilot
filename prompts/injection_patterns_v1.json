@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "_comment": "Shared by the Rust guard crate (request path) and the Python ingestion scanner. Compile with case-insensitive AND dot-matches-newline (Python re.I|re.S; Rust RegexBuilder .case_insensitive(true).dot_matches_new_line(true)) and match against NORMALIZED text (NFKC, zero-width/bidi stripped). Word gaps are written as \\s+ so line breaks inside a phrase still match. Use only syntax valid in both engines (no lookaround, no backreferences). severity=high quarantines a document chunk at ingestion.",
+  "patterns": [
+    {
+      "id": "ignore_instructions",
+      "severity": "high",
+      "pattern": "\\b(ignore|disregard|forget|override)\\b.{0,40}\\b(previous|prior|above|earlier|all|any|your)\\b.{0,20}\\b(instructions?|rules?|prompts?|directives?|guidelines?)\\b"
+    },
+    {
+      "id": "addressed_to_ai",
+      "severity": "high",
+      "pattern": "\\b(ai|llm|language\\s+model|chat\\s?bot|assistant)\\b\\s*(instruction|note|directive)?\\s*:\\s*(ignore|you\\s+are|you\\s+must|always|never|include|approve|reveal|print|do\\s+not)"
+    },
+    {
+      "id": "role_override",
+      "severity": "high",
+      "pattern": "\\b(you\\s+are\\s+now|from\\s+now\\s+on\\s+you\\s+are|pretend\\s+to\\s+be|switch\\s+to|act\\s+as)\\b.{0,40}\\b(\\w+\\s+mode|debug\\s?bot|unrestricted|jailbroken|dan)\\b"
+    },
+    {
+      "id": "fake_system_turn",
+      "severity": "high",
+      "pattern": "(^|\\n)\\s*(system|assistant|developer)\\s*:\\s*\\S"
+    },
+    {
+      "id": "system_prompt_extraction",
+      "severity": "high",
+      "pattern": "\\b(print|reveal|show|repeat|output|disclose|leak)\\b.{0,30}\\b(system\\s+prompt|your\\s+(instructions|prompt|rules)|hidden\\s+(instructions|prompt))\\b"
+    },
+    {
+      "id": "unauthorized_approval",
+      "severity": "medium",
+      "pattern": "\\b(you|assistant|ai)\\s+(are|is)\\s+(now\\s+)?(authori[sz]ed|permitted|allowed)\\b.{0,30}\\bto\\s+approve\\b"
+    },
+    {
+      "id": "no_restrictions",
+      "severity": "medium",
+      "pattern": "\\b(has|have|with)\\s+no\\s+(restrictions|limits|filters|guardrails)\\b|\\b(without\\s+any|bypass(\\s+all)?)\\s+(restrictions|limits|filters|guardrails|safety)\\b"
+    },
+    {
+      "id": "secrecy_directive",
+      "severity": "medium",
+      "pattern": "\\bdo\\s+not\\s+(mention|tell|reveal|disclose)\\s+(this|these)\\b.{0,20}\\b(note|instruction|message|to\\s+the\\s+user)\\b"
+    },
+    {
+      "id": "markdown_image_url",
+      "severity": "high",
+      "pattern": "!\\[[^\\]]*\\]\\(\\s*https?://[^)]*\\)"
+    },
+    {
+      "id": "template_exfil_placeholder",
+      "severity": "medium",
+      "pattern": "\\{\\{\\s*(user|conversation|history|email|question|prompt|context)[a-z_]*\\s*\\}\\}"
+    },
+    {
+      "id": "decode_and_follow",
+      "severity": "high",
+      "pattern": "\\b(decode|base64|rot13|hex)\\b.{0,30}\\b(follow|execute|obey|run)\\b"
+    }
+  ],
+  "encoded_blob": {
+    "_comment": "Long base64/hex runs are decoded and the decoded text is re-scanned with the patterns above.",
+    "base64": "[A-Za-z0-9+/]{24,}={0,2}",
+    "hex": "\\b(?:[0-9a-fA-F]{2}){16,}\\b"
+  }
+}

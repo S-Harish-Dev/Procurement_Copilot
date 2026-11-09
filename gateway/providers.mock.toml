@@ -1,0 +1,28 @@
+# Offline / load-test configuration: every tier is served by the local mock-llm (no keys, no cost).
+# Two "providers" pointing at the same mock let fallback be drilled by killing or failing one.
+retries = 1
+
+[breaker]
+failure_threshold = 3
+cooldown_secs = 10
+
+[[providers]]
+name = "mock-primary"
+base_url = "http://127.0.0.1:8090/v1"
+api_key_env = "MOCK_LLM_KEY"
+models = { cheap = "mock-small", expensive = "mock-large" }
+# Shadow prices mirror the real primary (Groq gpt-oss-20b) so load-test cost curves are realistic.
+price_in_per_m = 0.075
+price_out_per_m = 0.30
+free = true
+first_token_timeout_ms = 3000
+
+[[providers]]
+name = "mock-secondary"
+base_url = "http://127.0.0.1:8091/v1"
+api_key_env = "MOCK_LLM_KEY"
+models = { cheap = "mock-small", expensive = "mock-large" }
+price_in_per_m = 0.30
+price_out_per_m = 2.50
+free = true
+first_token_timeout_ms = 3000

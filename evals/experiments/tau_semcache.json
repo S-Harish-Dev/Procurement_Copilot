@@ -1,0 +1,335 @@
+{
+  "id": "tau_semcache",
+  "title": "Semantic cache threshold",
+  "kind": "tau_sweep",
+  "takeaway": "Hardest negative 0.874; paraphrases 0.765\u20130.950. Lowest threshold with 0 false hits among 7,284 same-key-term question pairs: 0.88 (50% paraphrase hits); 0.95 hits 0%",
+  "created_at": "2026-10-30T18:24:48Z",
+  "data": {
+    "curves": [
+      {
+        "name": "paraphrase hit rate",
+        "points": [
+          [
+            0.8,
+            0.8
+          ],
+          [
+            0.81,
+            0.8
+          ],
+          [
+            0.82,
+            0.8
+          ],
+          [
+            0.83,
+            0.7
+          ],
+          [
+            0.84,
+            0.7
+          ],
+          [
+            0.85,
+            0.7
+          ],
+          [
+            0.86,
+            0.6
+          ],
+          [
+            0.87,
+            0.6
+          ],
+          [
+            0.88,
+            0.5
+          ],
+          [
+            0.89,
+            0.5
+          ],
+          [
+            0.9,
+            0.3
+          ],
+          [
+            0.91,
+            0.2
+          ],
+          [
+            0.92,
+            0.2
+          ],
+          [
+            0.93,
+            0.2
+          ],
+          [
+            0.94,
+            0.1
+          ],
+          [
+            0.95,
+            0.0
+          ],
+          [
+            0.96,
+            0.0
+          ],
+          [
+            0.97,
+            0.0
+          ],
+          [
+            0.98,
+            0.0
+          ],
+          [
+            0.99,
+            0.0
+          ]
+        ]
+      },
+      {
+        "name": "false hit rate",
+        "points": [
+          [
+            0.8,
+            0.01002
+          ],
+          [
+            0.81,
+            0.00714
+          ],
+          [
+            0.82,
+            0.00426
+          ],
+          [
+            0.83,
+            0.00288
+          ],
+          [
+            0.84,
+            0.00151
+          ],
+          [
+            0.85,
+            0.00082
+          ],
+          [
+            0.86,
+            0.00041
+          ],
+          [
+            0.87,
+            0.00027
+          ],
+          [
+            0.88,
+            0.0
+          ],
+          [
+            0.89,
+            0.0
+          ],
+          [
+            0.9,
+            0.0
+          ],
+          [
+            0.91,
+            0.0
+          ],
+          [
+            0.92,
+            0.0
+          ],
+          [
+            0.93,
+            0.0
+          ],
+          [
+            0.94,
+            0.0
+          ],
+          [
+            0.95,
+            0.0
+          ],
+          [
+            0.96,
+            0.0
+          ],
+          [
+            0.97,
+            0.0
+          ],
+          [
+            0.98,
+            0.0
+          ],
+          [
+            0.99,
+            0.0
+          ]
+        ]
+      }
+    ],
+    "x_label": "cosine threshold",
+    "y_label": "rate",
+    "chosen": {
+      "x": 0.88,
+      "y": 0.5,
+      "label": "0 false hits"
+    },
+    "table": [
+      {
+        "threshold": 0.8,
+        "paraphrase_hit_rate": 0.8,
+        "false_hit_rate": 0.01002,
+        "false_hits": 73
+      },
+      {
+        "threshold": 0.81,
+        "paraphrase_hit_rate": 0.8,
+        "false_hit_rate": 0.00714,
+        "false_hits": 52
+      },
+      {
+        "threshold": 0.82,
+        "paraphrase_hit_rate": 0.8,
+        "false_hit_rate": 0.00426,
+        "false_hits": 31
+      },
+      {
+        "threshold": 0.83,
+        "paraphrase_hit_rate": 0.7,
+        "false_hit_rate": 0.00288,
+        "false_hits": 21
+      },
+      {
+        "threshold": 0.84,
+        "paraphrase_hit_rate": 0.7,
+        "false_hit_rate": 0.00151,
+        "false_hits": 11
+      },
+      {
+        "threshold": 0.85,
+        "paraphrase_hit_rate": 0.7,
+        "false_hit_rate": 0.00082,
+        "false_hits": 6
+      },
+      {
+        "threshold": 0.86,
+        "paraphrase_hit_rate": 0.6,
+        "false_hit_rate": 0.00041,
+        "false_hits": 3
+      },
+      {
+        "threshold": 0.87,
+        "paraphrase_hit_rate": 0.6,
+        "false_hit_rate": 0.00027,
+        "false_hits": 2
+      },
+      {
+        "threshold": 0.88,
+        "paraphrase_hit_rate": 0.5,
+        "false_hit_rate": 0.0,
+        "false_hits": 0
+      },
+      {
+        "threshold": 0.89,
+        "paraphrase_hit_rate": 0.5,
+        "false_hit_rate": 0.0,
+        "false_hits": 0
+      },
+      {
+        "threshold": 0.9,
+        "paraphrase_hit_rate": 0.3,
+        "false_hit_rate": 0.0,
+        "false_hits": 0
+      },
+      {
+        "threshold": 0.91,
+        "paraphrase_hit_rate": 0.2,
+        "false_hit_rate": 0.0,
+        "false_hits": 0
+      },
+      {
+        "threshold": 0.92,
+        "paraphrase_hit_rate": 0.2,
+        "false_hit_rate": 0.0,
+        "false_hits": 0
+      },
+      {
+        "threshold": 0.93,
+        "paraphrase_hit_rate": 0.2,
+        "false_hit_rate": 0.0,
+        "false_hits": 0
+      },
+      {
+        "threshold": 0.94,
+        "paraphrase_hit_rate": 0.1,
+        "false_hit_rate": 0.0,
+        "false_hits": 0
+      },
+      {
+        "threshold": 0.95,
+        "paraphrase_hit_rate": 0.0,
+        "false_hit_rate": 0.0,
+        "false_hits": 0
+      },
+      {
+        "threshold": 0.96,
+        "paraphrase_hit_rate": 0.0,
+        "false_hit_rate": 0.0,
+        "false_hits": 0
+      },
+      {
+        "threshold": 0.97,
+        "paraphrase_hit_rate": 0.0,
+        "false_hit_rate": 0.0,
+        "false_hits": 0
+      },
+      {
+        "threshold": 0.98,
+        "paraphrase_hit_rate": 0.0,
+        "false_hit_rate": 0.0,
+        "false_hits": 0
+      },
+      {
+        "threshold": 0.99,
+        "paraphrase_hit_rate": 0.0,
+        "false_hit_rate": 0.0,
+        "false_hits": 0
+      }
+    ],
+    "positives": [
+      0.909,
+      0.782,
+      0.897,
+      0.95,
+      0.83,
+      0.893,
+      0.765,
+      0.934,
+      0.875,
+      0.858
+    ],
+    "hardest_negatives": [
+      0.843,
+      0.846,
+      0.847,
+      0.849,
+      0.851,
+      0.852,
+      0.856,
+      0.861,
+      0.872,
+      0.874
+    ],
+    "n_negative_pairs": 7284
+  }
+}

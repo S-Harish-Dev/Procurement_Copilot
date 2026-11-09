@@ -1,0 +1,7 @@
+* text=auto
+*.sh text eol=lf
+Makefile text eol=lf
+# index bundle is checksummed: never rewrite line endings
+data/index_bundle/** -text
+*.npy binary
+*.pdf binary

@@ -1,0 +1,158 @@
+{
+  "id": "hnsw_ef",
+  "title": "HNSW ef: recall vs latency (vs exact search)",
+  "kind": "hnsw_ef",
+  "takeaway": "ef=8 already returns 100.0% of the exact top-20 at 43.88 ms p50 (exact: 43.8 ms); filtered ACL searches are small, so HNSW is cheap",
+  "created_at": "2026-10-30T18:24:38Z",
+  "data": {
+    "curves": [
+      {
+        "name": "share of exact top-20",
+        "points": [
+          [
+            8,
+            1.0
+          ],
+          [
+            16,
+            1.0
+          ],
+          [
+            32,
+            1.0
+          ],
+          [
+            64,
+            1.0
+          ],
+          [
+            128,
+            1.0
+          ],
+          [
+            256,
+            1.0
+          ]
+        ]
+      },
+      {
+        "name": "gold recall@20",
+        "points": [
+          [
+            8,
+            0.895
+          ],
+          [
+            16,
+            0.895
+          ],
+          [
+            32,
+            0.895
+          ],
+          [
+            64,
+            0.895
+          ],
+          [
+            128,
+            0.895
+          ],
+          [
+            256,
+            0.895
+          ]
+        ]
+      }
+    ],
+    "x_label": "hnsw_ef",
+    "y_label": "recall",
+    "chosen": {
+      "x": 8,
+      "y": 1.0,
+      "label": "smallest ef \u2265 99% of exact"
+    },
+    "table": [
+      {
+        "variant": "hnsw_ef=8",
+        "x": 8,
+        "ann_recall_vs_exact": 1.0,
+        "p50_ms": 43.88,
+        "recall@20": 0.895,
+        "mrr": 0.679
+      },
+      {
+        "variant": "hnsw_ef=16",
+        "x": 16,
+        "ann_recall_vs_exact": 1.0,
+        "p50_ms": 43.85,
+        "recall@20": 0.895,
+        "mrr": 0.679
+      },
+      {
+        "variant": "hnsw_ef=32",
+        "x": 32,
+        "ann_recall_vs_exact": 1.0,
+        "p50_ms": 43.83,
+        "recall@20": 0.895,
+        "mrr": 0.679
+      },
+      {
+        "variant": "hnsw_ef=64",
+        "x": 64,
+        "ann_recall_vs_exact": 1.0,
+        "p50_ms": 43.86,
+        "recall@20": 0.895,
+        "mrr": 0.679
+      },
+      {
+        "variant": "hnsw_ef=128",
+        "x": 128,
+        "ann_recall_vs_exact": 1.0,
+        "p50_ms": 43.85,
+        "recall@20": 0.895,
+        "mrr": 0.679
+      },
+      {
+        "variant": "hnsw_ef=256",
+        "x": 256,
+        "ann_recall_vs_exact": 1.0,
+        "p50_ms": 43.85,
+        "recall@20": 0.895,
+        "mrr": 0.679
+      },
+      {
+        "variant": "int8 + rescore (production default)",
+        "x": null,
+        "ann_recall_vs_exact": 1.0,
+        "p50_ms": 43.88,
+        "recall@20": 0.895,
+        "mrr": 0.679
+      },
+      {
+        "variant": "int8, no rescore",
+        "x": null,
+        "ann_recall_vs_exact": 1.0,
+        "p50_ms": 43.88,
+        "recall@20": 0.895,
+        "mrr": 0.679
+      },
+      {
+        "variant": "fp32 HNSW (quantization ignored)",
+        "x": null,
+        "ann_recall_vs_exact": 1.0,
+        "p50_ms": 43.89,
+        "recall@20": 0.895,
+        "mrr": 0.679
+      },
+      {
+        "variant": "exact (brute force, fp32)",
+        "x": null,
+        "ann_recall_vs_exact": 1.0,
+        "p50_ms": 43.82,
+        "recall@20": 0.895,
+        "mrr": 0.679
+      }
+    ]
+  }
+}

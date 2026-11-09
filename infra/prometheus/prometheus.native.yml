@@ -1,0 +1,12 @@
+# Scrapes the gateway's Prometheus endpoint (native stack). The Insights overview queries this
+# server's HTTP API, and Grafana can add it as a datasource. otel-lgtm's own Prometheus only
+# receives OTLP pushes, and the gateway exposes pull metrics.
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+rule_files:
+  - alerts.yml
+scrape_configs:
+  - job_name: gateway
+    static_configs:
+      - targets: ["127.0.0.1:9464"]

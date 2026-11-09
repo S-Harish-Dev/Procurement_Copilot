@@ -1,0 +1,32 @@
+{
+  "acme": {
+    "classifications": ["public", "internal", "confidential", "restricted"],
+    "confidential": {
+      "roles": ["finance", "admin"],
+      "departments": ["Finance", "Legal"]
+    },
+    "approval": {
+      "auto_approve_max": 1000,
+      "finance_threshold": 10000,
+      "admin_threshold": 100000
+    },
+    "tools": {
+      "search_vendors":          {"roles": ["employee", "manager", "finance", "admin"], "write": false},
+      "get_vendor":              {"roles": ["employee", "manager", "finance", "admin"], "write": false},
+      "get_budget":              {"roles": ["employee", "manager", "finance", "admin"], "write": false},
+      "get_spend_summary":       {"roles": ["employee", "manager", "finance", "admin"], "write": false},
+      "list_my_requests":        {"roles": ["employee", "manager", "finance", "admin"], "write": false},
+      "get_purchase_request":    {"roles": ["employee", "manager", "finance", "admin"], "write": false},
+      "get_approval_chain":      {"roles": ["employee", "manager", "finance", "admin"], "write": false},
+      "list_pending_approvals":  {"roles": ["manager", "finance", "admin"], "write": false},
+      "create_purchase_request": {"roles": ["employee", "manager", "finance", "admin"], "write": true},
+      "submit_purchase_request": {"roles": ["employee", "manager", "finance", "admin"], "write": true},
+      "approve_request":         {"roles": ["manager", "finance", "admin"], "write": true},
+      "reject_request":          {"roles": ["manager", "finance", "admin"], "write": true},
+      "send_email":              {"roles": ["employee", "manager", "finance", "admin"], "write": true},
+      "post_chat_message":       {"roles": ["employee", "manager", "finance", "admin"], "write": true},
+      "generate_po_pdf":         {"roles": ["employee", "manager", "finance", "admin"], "write": false}
+    },
+    "pii_roles": ["finance", "admin"]
+  }
+}

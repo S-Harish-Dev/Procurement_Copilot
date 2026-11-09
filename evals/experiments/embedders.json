@@ -1,0 +1,86 @@
+{
+  "id": "embedders",
+  "title": "Embedders (dense only)",
+  "kind": "embedders",
+  "takeaway": "nomic-v1.5 has the best MRR (0.679); production nomic-v1.5: MRR 0.679, recall@20 0.895 (dense only; production adds BM25)",
+  "created_at": "2026-10-30T18:23:01Z",
+  "data": {
+    "bars": [
+      {
+        "label": "nomic-v1.5",
+        "value": 0.895
+      },
+      {
+        "label": "nomic-v1.5-q",
+        "value": 0.867
+      },
+      {
+        "label": "bge-small-v1.5",
+        "value": 0.859
+      },
+      {
+        "label": "bge-base-v1.5",
+        "value": 0.844
+      }
+    ],
+    "unit": "recall@20",
+    "table": [
+      {
+        "model": "nomic-v1.5",
+        "dim": 768,
+        "query_ms": 25.1,
+        "index_mb": 34.8,
+        "recall@20": 0.895,
+        "hit@5": 0.816,
+        "mrr": 0.679,
+        "ndcg@10": 0.712,
+        "recall@20_ci": [
+          0.852,
+          0.936
+        ]
+      },
+      {
+        "model": "nomic-v1.5-q",
+        "dim": 768,
+        "query_ms": 12.2,
+        "index_mb": 34.8,
+        "recall@20": 0.867,
+        "hit@5": 0.805,
+        "mrr": 0.671,
+        "ndcg@10": 0.704,
+        "recall@20_ci": [
+          0.819,
+          0.913
+        ]
+      },
+      {
+        "model": "bge-small-v1.5",
+        "dim": 384,
+        "query_ms": 6.7,
+        "index_mb": 17.4,
+        "recall@20": 0.859,
+        "hit@5": 0.762,
+        "mrr": 0.635,
+        "ndcg@10": 0.667,
+        "recall@20_ci": [
+          0.811,
+          0.904
+        ]
+      },
+      {
+        "model": "bge-base-v1.5",
+        "dim": 768,
+        "query_ms": 16.6,
+        "index_mb": 34.8,
+        "recall@20": 0.844,
+        "hit@5": 0.692,
+        "mrr": 0.562,
+        "ndcg@10": 0.596,
+        "recall@20_ci": [
+          0.789,
+          0.892
+        ]
+      }
+    ]
+  }
+}

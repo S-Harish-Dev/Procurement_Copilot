@@ -1,0 +1,58 @@
+# --- secrets: only .env.example is committed ---
+.env
+.env.*
+!.env.example
+infra/keys/
+*.pem
+# throwaway RSA key used only by auth unit tests
+!gateway/crates/auth/testdata/*.pem
+
+# --- build output ---
+gateway/target/
+web/node_modules/
+web/.next/
+docs/handbook/build/node_modules/
+docs/handbook/build/handbook.html
+# rebuild with `make docs-pdf`
+docs/Procurement-Copilot-Handbook.pdf
+
+# --- Python ---
+__pycache__/
+*.pyc
+.venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# --- ML models: downloaded on demand, too large for git (GitHub caps files at 100 MB) ---
+#   fastembed models   -> auto-downloaded from Hugging Face on first use
+#   injection classifier -> `make classifier-model`
+models/
+
+# --- generated / rebuildable data ---
+data/raw/**
+!data/raw/.gitkeep
+data/cache/
+# generated purchase-order PDFs
+data/po/
+data/*.log
+
+# --- eval run outputs: committed only when promoted to evals/baselines/ ---
+evals/reports/*.json
+!evals/reports/.gitkeep
+
+# --- runtime state and local tooling ---
+.native/
+.qdrant-initialized
+snapshots/
+brain/snapshots/
+.playwright-mcp/
+.DS_Store
+*.log
+
+# --- private working notes and tool-generated agent files ---
+Journal.md
+web/AGENTS.md
+docs/handbook/07-interview-qa.md
+docs/video-script.md
+.impeccable/

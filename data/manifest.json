@@ -1,0 +1,59 @@
+{
+  "_comment": "Public corpus sources. `make download` fetches each into data/raw/<id>/ and records sha256 + size on first download; later downloads must match (detects upstream changes). Raw files are gitignored: UN and World Bank terms do not permit redistribution, so only this manifest is committed.",
+  "sources": [
+    {
+      "id": "far",
+      "title": "Federal Acquisition Regulation (FAR), full text",
+      "url": "https://www.acquisition.gov/sites/default/files/current/far/pdf/FAR.pdf",
+      "file": "FAR.pdf",
+      "license": "US Government work — public domain (17 U.S.C. §105)",
+      "redistributable": true,
+      "classification": "public",
+      "department": "all",
+      "note": "FAR is mid-rewrite under the 'Revolutionary FAR Overhaul' (acquisition.gov/far-overhaul); this is a point-in-time snapshot, see sha256.",
+      "sha256": "f22a17e30ff99682edcba9f6827e349cac0ecbe8908888c08616a81397e85bca",
+      "bytes": 13082043,
+      "retrieved_at": "2026-10-30"
+    },
+    {
+      "id": "worldbank",
+      "title": "World Bank Procurement Regulations for IPF Borrowers, 7th Edition (September 2025)",
+      "url": "https://thedocs.worldbank.org/en/doc/c84273d1b230aeb2b0b8134de5dc8cd7-0290012025/original/Procurement-Regulations-7th-Edition-Sep-2025.pdf",
+      "file": "Procurement-Regulations-7th-Edition-Sep-2025.pdf",
+      "license": "© International Bank for Reconstruction and Development / The World Bank — World Bank Terms of Use; downloaded at build time, not redistributed",
+      "redistributable": false,
+      "classification": "public",
+      "department": "all",
+      "sha256": "7f118ac8fa8949ef23790d84f74c975a98c4bba4effd69328ead58d71578b6f3",
+      "bytes": 1315218,
+      "retrieved_at": "2026-10-30"
+    },
+    {
+      "id": "un",
+      "title": "United Nations Procurement Manual",
+      "url": "https://www.un.org/Depts/ptd/sites/www.un.org.Depts.ptd/files/files/attachment/page/pdf/pm.pdf",
+      "file": "pm.pdf",
+      "license": "© United Nations — un.org Terms of Use (personal, non-commercial use; no redistribution); downloaded at build time, not redistributed",
+      "redistributable": false,
+      "classification": "public",
+      "department": "all",
+      "sha256": "5058e1cc6df9397df3af640151aed081f4fec98a81da7bebc32918c4758065f3",
+      "bytes": 1749757,
+      "retrieved_at": "2026-10-30"
+    },
+    {
+      "id": "cuad",
+      "title": "CUAD v1 — Contract Understanding Atticus Dataset (The Atticus Project)",
+      "url": "https://github.com/TheAtticusProject/cuad/raw/main/data.zip",
+      "file": "data.zip",
+      "license": "CC BY 4.0 — attribution: The Atticus Project, CUAD v1 (Hendrycks et al., 2021)",
+      "redistributable": true,
+      "classification": "public",
+      "department": "all",
+      "note": "Only a deterministic subset of ~100 procurement-relevant contracts is ingested (see brain/ingestion/sources.py).",
+      "sha256": "f8161d18bea4e9c05e78fa6dda61c19c846fb8087ea969c172753bc2f45b999a",
+      "bytes": 18309308,
+      "retrieved_at": "2026-10-30"
+    }
+  ]
+}

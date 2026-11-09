@@ -1,0 +1,209 @@
+{
+  "departments": [
+    {
+      "id": "IT",
+      "name": "Information Technology"
+    },
+    {
+      "id": "HR",
+      "name": "Human Resources"
+    },
+    {
+      "id": "Finance",
+      "name": "Finance"
+    },
+    {
+      "id": "Legal",
+      "name": "Legal"
+    },
+    {
+      "id": "Operations",
+      "name": "Operations"
+    },
+    {
+      "id": "Marketing",
+      "name": "Marketing"
+    }
+  ],
+  "users": [
+    {
+      "id": "priya.sharma",
+      "email": "priya.sharma@acme.example",
+      "name": "Priya Sharma",
+      "role": "employee",
+      "department_id": "IT",
+      "spend_limit": 5000,
+      "approval_limit": 0
+    },
+    {
+      "id": "marcus.lee",
+      "email": "marcus.lee@acme.example",
+      "name": "Marcus Lee",
+      "role": "employee",
+      "department_id": "Marketing",
+      "spend_limit": 5000,
+      "approval_limit": 0
+    },
+    {
+      "id": "sofia.alvarez",
+      "email": "sofia.alvarez@acme.example",
+      "name": "Sofia Alvarez",
+      "role": "employee",
+      "department_id": "Operations",
+      "spend_limit": 5000,
+      "approval_limit": 0
+    },
+    {
+      "id": "daniel.okafor",
+      "email": "daniel.okafor@acme.example",
+      "name": "Daniel Okafor",
+      "role": "employee",
+      "department_id": "Legal",
+      "spend_limit": 5000,
+      "approval_limit": 0
+    },
+    {
+      "id": "noah.williams",
+      "email": "noah.williams@acme.example",
+      "name": "Noah Williams",
+      "role": "employee",
+      "department_id": "HR",
+      "spend_limit": 5000,
+      "approval_limit": 0
+    },
+    {
+      "id": "james.chen",
+      "email": "james.chen@acme.example",
+      "name": "James Chen",
+      "role": "manager",
+      "department_id": "IT",
+      "spend_limit": 25000,
+      "approval_limit": 25000
+    },
+    {
+      "id": "aisha.rahman",
+      "email": "aisha.rahman@acme.example",
+      "name": "Aisha Rahman",
+      "role": "manager",
+      "department_id": "Marketing",
+      "spend_limit": 25000,
+      "approval_limit": 25000
+    },
+    {
+      "id": "tom.becker",
+      "email": "tom.becker@acme.example",
+      "name": "Tom Becker",
+      "role": "manager",
+      "department_id": "Operations",
+      "spend_limit": 25000,
+      "approval_limit": 25000
+    },
+    {
+      "id": "grace.kim",
+      "email": "grace.kim@acme.example",
+      "name": "Grace Kim",
+      "role": "manager",
+      "department_id": "HR",
+      "spend_limit": 10000,
+      "approval_limit": 5000
+    },
+    {
+      "id": "lucas.martin",
+      "email": "lucas.martin@acme.example",
+      "name": "Lucas Martin",
+      "role": "manager",
+      "department_id": "Finance",
+      "spend_limit": 25000,
+      "approval_limit": 25000
+    },
+    {
+      "id": "hannah.schmidt",
+      "email": "hannah.schmidt@acme.example",
+      "name": "Hannah Schmidt",
+      "role": "manager",
+      "department_id": "Legal",
+      "spend_limit": 25000,
+      "approval_limit": 25000
+    },
+    {
+      "id": "elena.petrova",
+      "email": "elena.petrova@acme.example",
+      "name": "Elena Petrova",
+      "role": "finance",
+      "department_id": "Finance",
+      "spend_limit": 100000,
+      "approval_limit": 100000
+    },
+    {
+      "id": "ravi.iyer",
+      "email": "ravi.iyer@acme.example",
+      "name": "Ravi Iyer",
+      "role": "finance",
+      "department_id": "Finance",
+      "spend_limit": 100000,
+      "approval_limit": 100000
+    },
+    {
+      "id": "olivia.grant",
+      "email": "olivia.grant@acme.example",
+      "name": "Olivia Grant",
+      "role": "admin",
+      "department_id": "Operations",
+      "spend_limit": 1000000,
+      "approval_limit": 10000000
+    },
+    {
+      "id": "kenji.watanabe",
+      "email": "kenji.watanabe@acme.example",
+      "name": "Kenji Watanabe",
+      "role": "admin",
+      "department_id": "IT",
+      "spend_limit": 1000000,
+      "approval_limit": 10000000
+    }
+  ],
+  "budgets": [
+    {
+      "department_id": "IT",
+      "fiscal_year": 2026,
+      "allocated": 2500000,
+      "committed": 68227.19,
+      "spent": 235107.83
+    },
+    {
+      "department_id": "HR",
+      "fiscal_year": 2026,
+      "allocated": 400000,
+      "committed": 38524.79,
+      "spent": 79656.55
+    },
+    {
+      "department_id": "Finance",
+      "fiscal_year": 2026,
+      "allocated": 300000,
+      "committed": 37554.08,
+      "spent": 138416.6
+    },
+    {
+      "department_id": "Legal",
+      "fiscal_year": 2026,
+      "allocated": 600000,
+      "committed": 52391.0,
+      "spent": 86612.85
+    },
+    {
+      "department_id": "Operations",
+      "fiscal_year": 2026,
+      "allocated": 1800000,
+      "committed": 27397.62,
+      "spent": 168467.75
+    },
+    {
+      "department_id": "Marketing",
+      "fiscal_year": 2026,
+      "allocated": 1200000,
+      "committed": 87964.39,
+      "spent": 160085.3
+    }
+  ]
+}

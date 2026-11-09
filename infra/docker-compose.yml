@@ -1,0 +1,198 @@
+# Procurement Copilot — local stack.
+# Explicit project name: the repo folder contains a space, which Compose would otherwise mangle.
+name: procurement-copilot
+
+# Every port is published on 127.0.0.1 only: nothing here (Postgres, Valkey, OPA)
+# has production-grade auth.
+# Host ports are overridable from .env in case another user grabs one.
+
+x-healthcheck-defaults: &hc
+  interval: 5s
+  timeout: 3s
+  retries: 20
+  start_period: 5s
+
+services:
+  postgres:
+    image: postgres:18.6-trixie
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-acme}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-acme-dev-only}
+      POSTGRES_DB: ${POSTGRES_DB:-procurement}
+    ports: ["127.0.0.1:${POSTGRES_PORT:-5432}:5432"]
+    volumes:
+      # Postgres 18 images keep data under /var/lib/postgresql/<major>/; mount the parent.
+      - pgdata:/var/lib/postgresql
+    healthcheck:
+      <<: *hc
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-acme} -d ${POSTGRES_DB:-procurement}"]
+
+  qdrant:
+    image: qdrant/qdrant:v1.20.0
+    ports:
+      - "127.0.0.1:${QDRANT_HTTP_PORT:-6333}:6333"
+      - "127.0.0.1:${QDRANT_GRPC_PORT:-6334}:6334"
+    volumes: [qdrant:/qdrant/storage]
+    healthcheck:
+      <<: *hc
+      # The image has no curl/wget; bash's /dev/tcp is enough to probe the readiness endpoint.
+      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/127.0.0.1/6333 && printf \"GET /readyz HTTP/1.0\\r\\n\\r\\n\" >&3 && grep -q \"200 OK\" <&3'"]
+
+  valkey:
+    image: valkey/valkey:9.1.3-trixie
+    environment:
+      VALKEY_PASSWORD: ${VALKEY_PASSWORD}
+    # Cache + counters only: losing them is acceptable, so no AOF; cap memory and evict LRU.
+    command: ["valkey-server", "--requirepass", "${VALKEY_PASSWORD:?run make env}", "--save", "", "--appendonly", "no",
+              "--maxmemory", "1gb", "--maxmemory-policy", "allkeys-lru"]
+    ports: ["127.0.0.1:${VALKEY_PORT:-6379}:6379"]
+    healthcheck:
+      <<: *hc
+      test: ["CMD-SHELL", "valkey-cli -a \"$$VALKEY_PASSWORD\" --no-auth-warning ping | grep -q PONG"]
+
+  opa:
+    image: openpolicyagent/opa:1.22.0-static
+    command:
+      - run
+      - --server
+      - --addr=0.0.0.0:8181
+      - --log-format=json
+      # Decision logs to stdout -> collected as the audit trail of every authz decision.
+      - --set=decision_logs.console=true
+      - /policies/authz.rego
+      - /policies/data.json
+    ports: ["127.0.0.1:${OPA_PORT:-8181}:8181"]
+    volumes: ["../policies:/policies:ro"]
+    # No in-container healthcheck: the static image has no shell or HTTP client.
+    # `make up` polls http://127.0.0.1:8181/health from the host instead.
+
+  otel-lgtm:
+    image: grafana/otel-lgtm:0.39.0
+    ports:
+      - "127.0.0.1:${GRAFANA_PORT:-3000}:3000"
+      - "127.0.0.1:${OTLP_GRPC_PORT:-4317}:4317"
+      - "127.0.0.1:${OTLP_HTTP_PORT:-4318}:4318"
+    volumes:
+      - lgtm:/data
+      - ./grafana/dashboards:/otel-lgtm/dashboards/procurement:ro
+      # Gateway Prometheus datasource + dashboard provider (paths assumed for otel-lgtm 0.39; verify
+      # on first `make up`, see Limitation.md §12). Verified natively with the same provisioning files.
+      - ./grafana/provisioning/datasources/procurement.yaml:/otel-lgtm/grafana/conf/provisioning/datasources/procurement.yaml:ro
+      - ./grafana/provisioning/dashboards/procurement.yaml:/otel-lgtm/grafana/conf/provisioning/dashboards/procurement.yaml:ro
+    environment:
+      PROMETHEUS_URL: http://prometheus:9090
+      DASHBOARDS_DIR: /otel-lgtm/dashboards/procurement
+
+  prometheus:
+    image: prom/prometheus:v3.15.1
+    command: ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.retention.time=15d"]
+    ports:
+      - "127.0.0.1:${PROMETHEUS_PORT:-9090}:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus/alerts.yml:/etc/prometheus/alerts.yml:ro
+      - prometheus:/prometheus
+
+  mailpit:
+    image: axllent/mailpit:v1.32.0
+    ports:
+      - "127.0.0.1:${MAILPIT_UI_PORT:-8025}:8025"
+      - "127.0.0.1:${SMTP_PORT:-1025}:1025"
+
+  gateway:
+    build: { context: .., dockerfile: gateway/Dockerfile, target: gateway }
+    image: procurement-copilot/gateway:dev
+    env_file: ../.env
+    environment:
+      # Service hostnames inside the compose network override the localhost URLs in .env.
+      DATABASE_URL: postgresql://${POSTGRES_USER:-acme}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-procurement}
+      VALKEY_URL: redis://:${VALKEY_PASSWORD}@valkey:6379
+      QDRANT_GRPC_URL: http://qdrant:6334
+      OPA_URL: http://opa:8181
+      BRAIN_URL: http://brain:50051
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-lgtm:4317
+      PROMETHEUS_URL: http://prometheus:9090
+      GRAFANA_URL: http://127.0.0.1:${GRAFANA_PORT:-3000}
+      REPO_ROOT: /app                           # Insights reads /app/evals (mounted below)
+      GATEWAY_INTERNAL_BIND: 0.0.0.0:8081       # reachable on the compose network only (not published)
+      JWT_PRIVATE_KEY: /run/keys/jwt-private.pem
+      JWT_PUBLIC_KEY: /run/keys/jwt-public.pem
+      PROVIDERS_TOML: /app/gateway/${PROVIDERS_FILE:-providers.toml}
+      PO_DIR: /data/po
+    volumes:
+      - ./keys:/run/keys:ro
+      - models:/models                          # nomic model cache survives rebuilds
+      - po:/data/po:ro                          # PO PDFs written by mcp-notify
+      - ../evals:/app/evals:ro                  # eval reports, baselines, experiments (Insights)
+    ports:
+      - "127.0.0.1:${GATEWAY_PORT:-8080}:8080"
+      - "127.0.0.1:${GATEWAY_METRICS_PORT:-9464}:9464"
+    depends_on:
+      postgres: { condition: service_healthy }
+      qdrant: { condition: service_healthy }
+      valkey: { condition: service_healthy }
+      opa: { condition: service_started }
+
+  # --- Python side (one image, three services) ---------------------------------------------------
+  brain:
+    build: { context: .., dockerfile: brain/Dockerfile }
+    image: procurement-copilot/brain:dev
+    command: ["python", "-m", "agent.server"]
+    env_file: ../.env
+    environment: &brain-env
+      DATABASE_URL: postgresql://${POSTGRES_USER:-acme}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-procurement}
+      OPA_URL: http://opa:8181
+      SMTP_HOST: mailpit
+      SMTP_PORT: "1025"
+      JWT_PUBLIC_KEY: /run/keys/jwt-public.pem
+      GATEWAY_INTERNAL_URL: http://gateway:8081
+      MCP_PROCUREMENT_URL: http://mcp-procurement:8101/mcp
+      MCP_NOTIFY_URL: http://mcp-notify:8102/mcp
+      BRAIN_BIND: 0.0.0.0:50051
+      MCP_HOST: 0.0.0.0
+    volumes: ["./keys/jwt-public.pem:/run/keys/jwt-public.pem:ro"]
+    depends_on: [mcp-procurement, mcp-notify]
+
+  mcp-procurement:
+    image: procurement-copilot/brain:dev
+    command: ["python", "-m", "mcp_servers.procurement.server"]
+    env_file: ../.env
+    environment: { <<: *brain-env, MCP_PORT: "8101" }
+    volumes: ["./keys/jwt-public.pem:/run/keys/jwt-public.pem:ro"]
+    depends_on:
+      postgres: { condition: service_healthy }
+
+  mcp-notify:
+    image: procurement-copilot/brain:dev
+    command: ["python", "-m", "mcp_servers.notify.server"]
+    env_file: ../.env
+    environment: { <<: *brain-env, MCP_PORT: "8102" }
+    volumes:
+      - ./keys/jwt-public.pem:/run/keys/jwt-public.pem:ro
+      - po:/data/po
+    depends_on:
+      postgres: { condition: service_healthy }
+
+  # Offline demo / load tests: OpenAI-compatible fake LLM + mock Jev. Two instances so LLM
+  # fallback can be drilled by stopping one (`docker compose stop mock-llm`).
+  mock-llm:
+    build: { context: .., dockerfile: gateway/Dockerfile, target: mock-llm }
+    image: procurement-copilot/mock-llm:dev
+    profiles: ["offline", "loadtest"]
+    ports: ["127.0.0.1:${MOCK_LLM_PORT:-8090}:8090"]
+  mock-llm-2:
+    image: procurement-copilot/mock-llm:dev
+    profiles: ["offline", "loadtest"]
+  # Mock Jev on its own instance (set JEV_BASE_URL=http://mock-jev:8090 and TYPESAFE_API_KEY=mock
+  # in .env for offline runs), so a Jev outage can be drilled independently of the LLMs.
+  mock-jev:
+    image: procurement-copilot/mock-llm:dev
+    profiles: ["offline", "loadtest"]
+
+volumes:
+  pgdata:
+  prometheus:
+  qdrant:
+  lgtm:
+  models:
+  po:

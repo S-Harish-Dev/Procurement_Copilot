@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 990" width="1600" height="990" role="img" aria-label="Procurement Copilot architecture">
+<defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#256abf"/></marker>
+<marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a94a6"/></marker>
+<filter id="sh" x="-5%" y="-5%" width="110%" height="115%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f3d7a" flood-opacity="0.10"/></filter>
+</defs>
+<rect width="1600" height="990" rx="24" fill="#ffffff"/><rect x="1" y="1" width="1598" height="988" rx="23" fill="none" stroke="#e3e7ee" stroke-width="2"/>
+<text x="48" y="66" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="30" font-weight="800" fill="#0f3d7a" text-anchor="start" >Procurement Copilot: architecture</text>
+<text x="48" y="94" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="16" font-weight="400" fill="#5b6578" text-anchor="start" >One Rust gateway on the hot path, a Python brain for actions, and a permission check at every hop.</text>
+<rect x="48" y="365" width="210" height="120" rx="12" fill="#f6f3ff" stroke="#c4b8ee" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="48" y="379" width="5" height="92" rx="2.5" fill="#6a4fd0"/>
+<text x="68" y="396" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#3d2a85" text-anchor="start" >Web UI</text>
+<text x="68" y="419" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >Next.js · React</text>
+<text x="68" y="438" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >chat · requests · approvals</text>
+<text x="68" y="457" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >admin Insights</text>
+<line x1="258" y1="425" x2="340" y2="425" stroke="#256abf" stroke-width="2.2" marker-end="url(#ah)"/><rect x="262.3" y="391" width="73.4" height="21" rx="10" fill="#ffffff" stroke="#dfe4ec"/><text x="299" y="406" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="12" font-weight="600" fill="#256abf" text-anchor="middle" >JWT · SSE</text>
+<rect x="340" y="140" width="660" height="535" rx="18" fill="#eef4fc" stroke="#256abf" stroke-width="2.2"/>
+<text x="366" y="176" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="22" font-weight="800" fill="#0f3d7a" text-anchor="start" >Rust gateway</text><text x="366" y="197" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13" font-weight="400" fill="#5b6578" text-anchor="start" >every request passes through here, in this order</text>
+<rect x="366" y="215" width="300" height="92" rx="12" fill="#ffffff" stroke="#9fbfe8" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="366" y="229" width="5" height="64" rx="2.5" fill="#256abf"/>
+<text x="386" y="246" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#0f3d7a" text-anchor="start" >Auth</text>
+<text x="386" y="269" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >RS256 JWT · per-user rate limits</text>
+<text x="386" y="288" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >strikes for repeated attacks</text>
+<rect x="684" y="215" width="300" height="92" rx="12" fill="#ffffff" stroke="#9fbfe8" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="684" y="229" width="5" height="64" rx="2.5" fill="#256abf"/>
+<text x="704" y="246" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#0f3d7a" text-anchor="start" >Guardrails</text>
+<text x="704" y="269" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >normalize · regex scan · ONNX classifier</text>
+<text x="704" y="288" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >PII masking before any model call</text>
+<rect x="366" y="322" width="300" height="92" rx="12" fill="#ffffff" stroke="#9fbfe8" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="366" y="336" width="5" height="64" rx="2.5" fill="#256abf"/>
+<text x="386" y="353" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#0f3d7a" text-anchor="start" >Router</text>
+<text x="386" y="376" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >intent and model tier from Jev</text>
+<text x="386" y="395" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >deterministic fallback if Jev is down</text>
+<rect x="684" y="322" width="300" height="92" rx="12" fill="#ffffff" stroke="#9fbfe8" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="684" y="336" width="5" height="64" rx="2.5" fill="#256abf"/>
+<text x="704" y="353" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#0f3d7a" text-anchor="start" >Cache</text>
+<text x="704" y="376" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >L1 in memory · L2 Valkey · semantic</text>
+<text x="704" y="395" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >keyed by permission scope</text>
+<rect x="366" y="429" width="300" height="92" rx="12" fill="#ffffff" stroke="#9fbfe8" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="366" y="443" width="5" height="64" rx="2.5" fill="#256abf"/>
+<text x="386" y="460" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#0f3d7a" text-anchor="start" >Hybrid retrieval</text>
+<text x="386" y="483" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >dense + BM25 with the access filter</text>
+<text x="386" y="502" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >inside the search, fused by RRF</text>
+<rect x="684" y="429" width="300" height="92" rx="12" fill="#ffffff" stroke="#9fbfe8" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="684" y="443" width="5" height="64" rx="2.5" fill="#256abf"/>
+<text x="704" y="460" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#0f3d7a" text-anchor="start" >Relevance gate</text>
+<text x="704" y="483" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >keeps relevant passages,</text>
+<text x="704" y="502" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >drops injected ones</text>
+<rect x="366" y="536" width="618" height="92" rx="12" fill="#ffffff" stroke="#9fbfe8" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="366" y="550" width="5" height="64" rx="2.5" fill="#256abf"/>
+<text x="386" y="567" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#0f3d7a" text-anchor="start" >LLM routing and output guard</text>
+<text x="386" y="590" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >Groq → Gemini → OpenRouter with circuit breakers and retry</text>
+<text x="386" y="609" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >citation check · canary leak guard · PII unmasked only if the role may</text>
+<rect x="1110" y="140" width="450" height="232" rx="16" fill="#f7f9fc" stroke="#d9e0ec" stroke-width="1.5"/><text x="1130" y="168" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#5b6578" text-anchor="start" letter-spacing="1.2">MODELS  ·  MASKED TEXT ONLY</text>
+<rect x="1130" y="172" width="410" height="84" rx="12" fill="#fff8ec" stroke="#efcf96" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="1130" y="186" width="5" height="56" rx="2.5" fill="#c77700"/>
+<text x="1150" y="203" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#7a4b00" text-anchor="start" >LLM providers</text>
+<text x="1150" y="226" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >Groq → Gemini → OpenRouter</text>
+<text x="1150" y="245" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >free-tier fallback chain</text>
+<rect x="1130" y="270" width="410" height="84" rx="12" fill="#fff8ec" stroke="#efcf96" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="1130" y="284" width="5" height="56" rx="2.5" fill="#c77700"/>
+<text x="1150" y="301" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#7a4b00" text-anchor="start" >Jev</text>
+<text x="1150" y="324" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >router + relevance gate (vendor service)</text>
+<text x="1150" y="343" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >degraded mode when unavailable</text>
+<line x1="1000" y1="256" x2="1110" y2="256" stroke="#256abf" stroke-width="2.2" marker-end="url(#ah)"/><rect x="1011.7" y="222" width="86.6" height="21" rx="10" fill="#ffffff" stroke="#dfe4ec"/><text x="1055" y="237" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="12" font-weight="600" fill="#256abf" text-anchor="middle" >masked text</text>
+<rect x="1110" y="400" width="450" height="275" rx="16" fill="#f7f9fc" stroke="#d9e0ec" stroke-width="1.5"/><text x="1130" y="428" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#5b6578" text-anchor="start" letter-spacing="1.2">DATA AND POLICY</text>
+<rect x="1130" y="432" width="200" height="96" rx="12" fill="#f1faf7" stroke="#9ad3c3" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="1130" y="446" width="5" height="68" rx="2.5" fill="#1b8a5a"/>
+<text x="1150" y="463" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b5e49" text-anchor="start" >Qdrant</text>
+<text x="1150" y="486" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >dense + BM25 vectors</text>
+<text x="1150" y="505" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >per-role access filter</text>
+<rect x="1350" y="432" width="190" height="96" rx="12" fill="#f1faf7" stroke="#9ad3c3" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="1350" y="446" width="5" height="68" rx="2.5" fill="#1b8a5a"/>
+<text x="1370" y="463" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b5e49" text-anchor="start" >Valkey</text>
+<text x="1370" y="486" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >cache · rate limits</text>
+<text x="1370" y="505" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >scope-keyed entries</text>
+<rect x="1130" y="548" width="200" height="96" rx="12" fill="#f7f8fa" stroke="#cfd5df" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="1130" y="562" width="5" height="68" rx="2.5" fill="#667085"/>
+<text x="1150" y="579" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#1c2230" text-anchor="start" >OPA</text>
+<text x="1150" y="602" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >Rego policies</text>
+<text x="1150" y="621" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >document grants per role</text>
+<rect x="1350" y="548" width="190" height="96" rx="12" fill="#f7f8fa" stroke="#cfd5df" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="1350" y="562" width="5" height="68" rx="2.5" fill="#667085"/>
+<text x="1370" y="579" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#1c2230" text-anchor="start" >Prometheus</text>
+<text x="1370" y="602" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >+ Grafana: metrics,</text>
+<text x="1370" y="621" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >alerts, request traces</text>
+<line x1="1000" y1="520" x2="1110" y2="520" stroke="#256abf" stroke-width="2.2" marker-end="url(#ah)"/><rect x="1005.1" y="486" width="99.8" height="21" rx="10" fill="#ffffff" stroke="#dfe4ec"/><text x="1055" y="501" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="12" font-weight="600" fill="#256abf" text-anchor="middle" >data · policy</text>
+<line x1="490" y1="675" x2="490" y2="735" stroke="#256abf" stroke-width="2.2" marker-end="url(#ah)"/><rect x="504.8" y="695" width="40.4" height="21" rx="10" fill="#ffffff" stroke="#dfe4ec"/><text x="525" y="710" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="12" font-weight="600" fill="#256abf" text-anchor="middle" >gRPC</text>
+<rect x="340" y="735" width="280" height="112" rx="12" fill="#ffffff" stroke="#9fbfe8" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="340" y="749" width="5" height="84" rx="2.5" fill="#256abf"/>
+<text x="360" y="766" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#0f3d7a" text-anchor="start" >Python brain</text>
+<text x="360" y="789" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >Pydantic AI agent</text>
+<text x="360" y="808" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >plans actions, never writes</text>
+<text x="360" y="827" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >to the database itself</text>
+<line x1="620" y1="791" x2="740" y2="791" stroke="#256abf" stroke-width="2.2" marker-end="url(#ah)"/><rect x="630.1" y="757" width="99.8" height="21" rx="10" fill="#ffffff" stroke="#dfe4ec"/><text x="680" y="772" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="12" font-weight="600" fill="#256abf" text-anchor="middle" >MCP · OBO JWT</text>
+<rect x="740" y="735" width="260" height="112" rx="12" fill="#ffffff" stroke="#9fbfe8" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="740" y="749" width="5" height="84" rx="2.5" fill="#256abf"/>
+<text x="760" y="766" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#0f3d7a" text-anchor="start" >MCP servers</text>
+<text x="760" y="789" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >procurement · notify</text>
+<text x="760" y="808" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >(requests, approvals, PO PDF,</text>
+<text x="760" y="827" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >e-mail), re-check policy each call</text>
+<rect x="1120" y="735" width="230" height="112" rx="12" fill="#f1faf7" stroke="#9ad3c3" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="1120" y="749" width="5" height="84" rx="2.5" fill="#1b8a5a"/>
+<text x="1140" y="766" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b5e49" text-anchor="start" >Postgres</text>
+<text x="1140" y="789" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >purchase requests, approvals,</text>
+<text x="1140" y="808" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >budgets, audit trail</text>
+<line x1="1000" y1="791" x2="1120" y2="791" stroke="#256abf" stroke-width="2.2" marker-end="url(#ah)"/>
+<line x1="1000" y1="750" x2="1150" y2="645" stroke="#8a94a6" stroke-width="2.2" stroke-dasharray="6 5" marker-end="url(#ahg)"/><rect x="1031.7" y="658" width="86.6" height="21" rx="10" fill="#ffffff" stroke="#dfe4ec"/><text x="1075" y="673" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="12" font-weight="600" fill="#667085" text-anchor="middle" >re-asks OPA</text>
+<rect x="48" y="880" width="1504" height="64" rx="12" fill="#f4f7fb" stroke="#dfe6f0"/>
+<text x="72" y="908" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="15" font-weight="700" fill="#0f3d7a" text-anchor="start" >Security at every hop</text><text x="72" y="929" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >OPA scope filter inside the vector search  ·  MCP servers verify a 60-second on-behalf-of JWT  ·  every write needs a one-time, payload-bound human confirmation</text>
+<line x1="1180" y1="965" x2="1230" y2="965" stroke="#256abf" stroke-width="2.2" marker-end="url(#ah)"/><text x="1240" y="970" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="12.5" font-weight="500" fill="#5b6578" text-anchor="start" >request path</text>
+<line x1="1350" y1="965" x2="1400" y2="965" stroke="#8a94a6" stroke-width="2.2" stroke-dasharray="6 5" marker-end="url(#ahg)"/><text x="1410" y="970" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="12.5" font-weight="500" fill="#5b6578" text-anchor="start" >policy re-check</text>
+</svg>

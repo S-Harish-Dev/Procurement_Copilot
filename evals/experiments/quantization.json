@@ -1,0 +1,62 @@
+{
+  "id": "quantization",
+  "title": "int8 scalar quantization vs fp32",
+  "kind": "quantization",
+  "takeaway": "int8 with rescoring matches fp32: int8 + rescore (production default): recall@20 0.895, int8, no rescore: recall@20 0.895, fp32 HNSW (quantization ignored): recall@20 0.895, exact (brute force, fp32): recall@20 0.895",
+  "created_at": "2026-10-30T18:24:38Z",
+  "data": {
+    "bars": [
+      {
+        "label": "int8 + rescore (production default)",
+        "value": 0.895
+      },
+      {
+        "label": "int8, no rescore",
+        "value": 0.895
+      },
+      {
+        "label": "fp32 HNSW (quantization ignored)",
+        "value": 0.895
+      },
+      {
+        "label": "exact (brute force, fp32)",
+        "value": 0.895
+      }
+    ],
+    "unit": "recall@20",
+    "table": [
+      {
+        "variant": "int8 + rescore (production default)",
+        "x": null,
+        "ann_recall_vs_exact": 1.0,
+        "p50_ms": 43.88,
+        "recall@20": 0.895,
+        "mrr": 0.679
+      },
+      {
+        "variant": "int8, no rescore",
+        "x": null,
+        "ann_recall_vs_exact": 1.0,
+        "p50_ms": 43.88,
+        "recall@20": 0.895,
+        "mrr": 0.679
+      },
+      {
+        "variant": "fp32 HNSW (quantization ignored)",
+        "x": null,
+        "ann_recall_vs_exact": 1.0,
+        "p50_ms": 43.89,
+        "recall@20": 0.895,
+        "mrr": 0.679
+      },
+      {
+        "variant": "exact (brute force, fp32)",
+        "x": null,
+        "ann_recall_vs_exact": 1.0,
+        "p50_ms": 43.82,
+        "recall@20": 0.895,
+        "mrr": 0.679
+      }
+    ]
+  }
+}

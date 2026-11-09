@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" width="1600" height="700" role="img" aria-label="How a question is answered">
+<defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#256abf"/></marker>
+<marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a94a6"/></marker>
+<filter id="sh" x="-5%" y="-5%" width="110%" height="115%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f3d7a" flood-opacity="0.10"/></filter>
+</defs>
+<rect width="1600" height="700" rx="24" fill="#ffffff"/><rect x="1" y="1" width="1598" height="698" rx="23" fill="none" stroke="#e3e7ee" stroke-width="2"/>
+<text x="48" y="66" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="30" font-weight="800" fill="#0f3d7a" text-anchor="start" >How a question is answered</text>
+<text x="48" y="94" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="16" font-weight="400" fill="#5b6578" text-anchor="start" >Every question passes these stages inside the gateway before the first word of the answer reaches the user.</text>
+<rect x="48" y="140" width="252" height="122" rx="12" fill="#ffffff" stroke="#9fbfe8" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="48" y="154" width="5" height="94" rx="2.5" fill="#256abf"/>
+<circle cx="78" cy="170" r="14" fill="#256abf"/><text x="78" y="175.5" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle" >1</text>
+<text x="102" y="175" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#0f3d7a" text-anchor="start" >Authenticate</text>
+<text x="68" y="202" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >Verify the JWT,</text>
+<text x="68" y="221" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >rate-limit per user</text>
+<rect x="361" y="140" width="252" height="122" rx="12" fill="#fff3f2" stroke="#f0b4ae" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="361" y="154" width="5" height="94" rx="2.5" fill="#c9382d"/>
+<circle cx="391" cy="170" r="14" fill="#c9382d"/><text x="391" y="175.5" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle" >2</text>
+<text x="415" y="175" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#8a1f17" text-anchor="start" >Guard</text>
+<text x="381" y="202" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >Normalize text, scan for</text>
+<text x="381" y="221" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >injection, mask PII</text>
+<rect x="674" y="140" width="252" height="122" rx="12" fill="#fff8ec" stroke="#efcf96" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="674" y="154" width="5" height="94" rx="2.5" fill="#c77700"/>
+<circle cx="704" cy="170" r="14" fill="#c77700"/><text x="704" y="175.5" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle" >3</text>
+<text x="728" y="175" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#7a4b00" text-anchor="start" >Route</text>
+<text x="694" y="202" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >Jev picks intent and tier;</text>
+<text x="694" y="221" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >classifier runs in parallel</text>
+<rect x="987" y="140" width="252" height="122" rx="12" fill="#f7f8fa" stroke="#cfd5df" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="987" y="154" width="5" height="94" rx="2.5" fill="#667085"/>
+<circle cx="1017" cy="170" r="14" fill="#667085"/><text x="1017" y="175.5" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle" >4</text>
+<text x="1041" y="175" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#1c2230" text-anchor="start" >Authorize</text>
+<text x="1007" y="202" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >OPA says which documents</text>
+<text x="1007" y="221" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >this role may read</text>
+<rect x="1300" y="140" width="252" height="122" rx="12" fill="#effaf0" stroke="#a6d9ac" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="1300" y="154" width="5" height="94" rx="2.5" fill="#2e8b3d"/>
+<circle cx="1330" cy="170" r="14" fill="#2e8b3d"/><text x="1330" y="175.5" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle" >5</text>
+<text x="1354" y="175" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#1d5e28" text-anchor="start" >Cache lookup</text>
+<text x="1320" y="202" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >Exact, then semantic cache, keyed</text>
+<text x="1320" y="221" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >by scope. A hit skips to the answer</text>
+<rect x="48" y="355" width="252" height="122" rx="12" fill="#f1faf7" stroke="#9ad3c3" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="48" y="369" width="5" height="94" rx="2.5" fill="#1b8a5a"/>
+<circle cx="78" cy="385" r="14" fill="#1b8a5a"/><text x="78" y="390.5" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle" >6</text>
+<text x="102" y="390" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b5e49" text-anchor="start" >Retrieve</text>
+<text x="68" y="417" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >Dense + BM25 in Qdrant,</text>
+<text x="68" y="436" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >same access filter, RRF</text>
+<rect x="361" y="355" width="252" height="122" rx="12" fill="#fff8ec" stroke="#efcf96" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="361" y="369" width="5" height="94" rx="2.5" fill="#c77700"/>
+<circle cx="391" cy="385" r="14" fill="#c77700"/><text x="391" y="390.5" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle" >7</text>
+<text x="415" y="390" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#7a4b00" text-anchor="start" >Gate</text>
+<text x="381" y="417" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >Keep relevant passages,</text>
+<text x="381" y="436" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >drop injected ones</text>
+<rect x="674" y="355" width="252" height="122" rx="12" fill="#fff8ec" stroke="#efcf96" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="674" y="369" width="5" height="94" rx="2.5" fill="#c77700"/>
+<circle cx="704" cy="385" r="14" fill="#c77700"/><text x="704" y="390.5" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle" >8</text>
+<text x="728" y="390" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#7a4b00" text-anchor="start" >Generate</text>
+<text x="694" y="417" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >Spotlighted prompt, fallback</text>
+<text x="694" y="436" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >chain Groq → Gemini → OpenRouter</text>
+<rect x="987" y="355" width="252" height="122" rx="12" fill="#fff3f2" stroke="#f0b4ae" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="987" y="369" width="5" height="94" rx="2.5" fill="#c9382d"/>
+<circle cx="1017" cy="385" r="14" fill="#c9382d"/><text x="1017" y="390.5" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle" >9</text>
+<text x="1041" y="390" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#8a1f17" text-anchor="start" >Output guard</text>
+<text x="1007" y="417" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >Validate citations, block</text>
+<text x="1007" y="436" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >canary leaks, unmask PII if allowed</text>
+<rect x="1300" y="355" width="252" height="122" rx="12" fill="#f6f3ff" stroke="#c4b8ee" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="1300" y="369" width="5" height="94" rx="2.5" fill="#6a4fd0"/>
+<circle cx="1330" cy="385" r="14" fill="#6a4fd0"/><text x="1330" y="390.5" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle" >10</text>
+<text x="1354" y="390" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="17" font-weight="700" fill="#3d2a85" text-anchor="start" >Answer</text>
+<text x="1320" y="417" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >Streamed with citations;</text>
+<text x="1320" y="436" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >cached if nothing degraded</text>
+<line x1="300" y1="201.0" x2="361" y2="201.0" stroke="#256abf" stroke-width="2.2" marker-end="url(#ah)"/>
+<line x1="613" y1="201.0" x2="674" y2="201.0" stroke="#256abf" stroke-width="2.2" marker-end="url(#ah)"/>
+<line x1="926" y1="201.0" x2="987" y2="201.0" stroke="#256abf" stroke-width="2.2" marker-end="url(#ah)"/>
+<line x1="1239" y1="201.0" x2="1300" y2="201.0" stroke="#256abf" stroke-width="2.2" marker-end="url(#ah)"/>
+<path d="M1426.0,262 L1426.0,328 L174.0,328 L174.0,355" fill="none" stroke="#256abf" stroke-width="2.2" marker-end="url(#ah)"/>
+<line x1="300" y1="416.0" x2="361" y2="416.0" stroke="#256abf" stroke-width="2.2" marker-end="url(#ah)"/>
+<line x1="613" y1="416.0" x2="674" y2="416.0" stroke="#256abf" stroke-width="2.2" marker-end="url(#ah)"/>
+<line x1="926" y1="416.0" x2="987" y2="416.0" stroke="#256abf" stroke-width="2.2" marker-end="url(#ah)"/>
+<line x1="1239" y1="416.0" x2="1300" y2="416.0" stroke="#256abf" stroke-width="2.2" marker-end="url(#ah)"/>
+<rect x="367" y="270" width="240" height="30" rx="15" fill="#fff3f2" stroke="#f0b4ae"/><text x="487.0" y="290" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#8a1f17" text-anchor="middle" >Blocked → the standard reply</text>
+<rect x="993" y="270" width="240" height="30" rx="15" fill="#f7f8fa" stroke="#cfd5df"/><text x="1113.0" y="290" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#1c2230" text-anchor="middle" >OPA down → public documents only</text>
+<rect x="680" y="489" width="240" height="30" rx="15" fill="#fff8ec" stroke="#efcf96"/><text x="800.0" y="509" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#7a4b00" text-anchor="middle" >Provider down → next in chain</text>
+<rect x="993" y="489" width="240" height="30" rx="15" fill="#fff3f2" stroke="#f0b4ae"/><text x="1113.0" y="509" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#8a1f17" text-anchor="middle" >Leak found → template reply</text>
+<rect x="48" y="560" width="1504" height="110" rx="14" fill="#f4f7fb" stroke="#dfe6f0"/>
+<text x="72" y="592" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="15" font-weight="700" fill="#0f3d7a" text-anchor="start" >Only three outcomes ever reach the user</text>
+<rect x="72" y="608" width="230" height="30" rx="15" fill="#effaf0" stroke="#a6d9ac"/><text x="187.0" y="628" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#1d5e28" text-anchor="middle" >answered, with citations</text>
+<rect x="318" y="608" width="560" height="30" rx="15" fill="#f7f8fa" stroke="#cfd5df"/><text x="598.0" y="628" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#1c2230" text-anchor="middle" >no information: one fixed reply for missing, restricted, out of scope and blocked</text>
+<rect x="894" y="608" width="300" height="30" rx="15" fill="#fff8ec" stroke="#efcf96"/><text x="1044.0" y="628" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#7a4b00" text-anchor="middle" >temporarily unavailable</text>
+<text x="72" y="660" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#5b6578" text-anchor="start" >Because all four "no" cases look identical (same text, events and timing), the system never reveals whether a restricted document exists.</text>
+</svg>

@@ -1,0 +1,106 @@
+"""Clause-structured contract text for Acme vendor contracts.
+
+Every number in the text comes from the contract's `facts`, so eval questions
+("What is the renewal notice period in C-0007?") have exact gold answers.
+The Parties/Payment/Notices clauses deliberately contain PII (contact name,
+email, phone, IBAN, tax id) so ingestion-time masking is exercised.
+"""
+
+from datetime import date
+from typing import Any
+
+
+def _money(x: float) -> str:
+    return f"USD {x:,.2f}"
+
+
+def _long_date(iso: str) -> str:
+    return date.fromisoformat(iso).strftime("%B %-d, %Y")
+
+
+def render_contract(c: dict[str, Any], v: dict[str, Any]) -> str:
+    f = c["facts"]
+    annual = c["value"] / f["term_years"]
+    renew = (
+        f"This Agreement renews automatically for successive one (1) year terms unless either party gives "
+        f"written notice of non-renewal at least {f['renewal_notice_days']} days before the end of the "
+        f"then-current term."
+        if f["auto_renew"]
+        else "This Agreement does not renew automatically. Any extension requires a written amendment "
+        "signed by both parties."
+    )
+    return f"""# {c["title"]}
+
+**Contract ID:** {c["id"]}
+**Effective Date:** {_long_date(c["start_date"])}
+**Owning Department:** {c["department"]}
+**Classification:** {c["classification"].upper()}
+
+## 1. Parties
+
+This {v["category"]} Agreement (the "Agreement") is entered into between Acme Corp, a Delaware corporation
+("Acme"), and {v["name"]} ("Supplier"), vendor number {v["id"]}. Supplier's account representative is
+{v["contact_name"]}. Supplier's taxpayer identification number is {v["tax_id"]}.
+
+## 2. Term and Renewal
+
+2.1 The initial term begins on {_long_date(c["start_date"])} and ends on {_long_date(c["end_date"])}
+({f["term_years"]} year{"s" if f["term_years"] > 1 else ""}).
+
+2.2 {renew}
+
+## 3. Scope of Services
+
+3.1 Supplier shall provide the {v["category"].lower()} described in Schedule A, in accordance with Acme's
+Procurement Policy and Supplier Code of Conduct.
+
+3.2 Supplier shall not subcontract any material part of the services without Acme's prior written consent.
+
+## 4. Fees and Payment
+
+4.1 The total contract value is {_money(c["value"])}, invoiced annually in advance at {_money(annual)} per
+contract year.
+
+4.2 Acme shall pay undisputed invoices within {f["payment_terms_days"]} days of receipt (Net
+{f["payment_terms_days"]}). Late payments accrue interest at {f["late_fee_pct_month"]}% per month.
+
+4.3 Payments shall be made by wire transfer to Supplier's account IBAN {v["iban"]}. Supplier must give
+thirty (30) days' written notice of any change to its bank details, confirmed by telephone call-back.
+
+## 5. Service Levels
+
+5.1 Supplier guarantees {f["uptime_sla_pct"]}% monthly availability for production services.
+
+5.2 For each full percentage point below the guaranteed availability, Acme receives a service credit of
+{f["service_credit_pct"]}% of the monthly fee, capped at 50% of that month's fee.
+
+## 6. Termination
+
+6.1 Either party may terminate for convenience on {f["termination_notice_days"]} days' written notice.
+
+6.2 Either party may terminate immediately on written notice if the other party materially breaches this
+Agreement and fails to cure the breach within thirty (30) days.
+
+## 7. Limitation of Liability
+
+Except for breaches of confidentiality, data protection obligations or indemnities, each party's aggregate
+liability under this Agreement is limited to {f["liability_cap_multiple"]}x the fees paid or payable in the
+twelve (12) months preceding the claim.
+
+## 8. Confidentiality and Data Protection
+
+8.1 Each party shall protect the other's Confidential Information with at least reasonable care and use it
+only to perform this Agreement.
+
+8.2 Where Supplier processes personal data on Acme's behalf, the Data Processing Addendum in Schedule B
+applies. Supplier shall notify Acme of any personal data breach within 72 hours.
+
+## 9. Notices
+
+Notices to Supplier shall be sent to {v["contact_name"]} at {v["contact_email"]} or by telephone at
+{v["phone"]}. Notices to Acme shall be sent to legal-notices@acme.example.
+
+## 10. Governing Law
+
+This Agreement is governed by the laws of {f["governing_law"]}, without regard to its conflict-of-laws rules.
+"""

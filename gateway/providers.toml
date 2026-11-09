@@ -1,0 +1,53 @@
+# LLM providers, in fallback order: Groq -> Gemini -> OpenRouter.
+# All speak the OpenAI chat-completions API. Checked 2026-10-30 against each provider's docs:
+#   models  - Groq console docs/models; Gemini docs/models (stable only); OpenRouter /api/v1/models
+#   prices  - list prices of the PAID tier, used only for the *shadow* cost metric (free = true -> actual $0)
+#   limits  - see per-provider notes; free-tier numbers are per account/project and must be confirmed
+#             in each console once keys exist (they are upper bounds here, not promises).
+retries = 2
+
+[breaker]
+failure_threshold = 3
+cooldown_secs = 30
+
+[[providers]]
+name = "groq"
+base_url = "https://api.groq.com/openai/v1"
+api_key_env = "GROQ_API_KEY"
+models = { cheap = "openai/gpt-oss-20b", expensive = "openai/gpt-oss-120b" }
+# Groq's rate-limit page shows Developer-plan base limits (30 RPM, 1K RPD, 8K TPM, 200K TPD for both
+# gpt-oss models); free-plan limits are only visible in the org console. TPM usually binds first.
+limits = { rpm = 30, rpd = 1000, tpm = 8000 }
+price_in_per_m = 0.075     # gpt-oss-20b list price; gpt-oss-120b is 0.15 / 0.60
+price_out_per_m = 0.30
+free = true
+first_token_timeout_ms = 6000
+
+[[providers]]
+name = "gemini"
+base_url = "https://generativelanguage.googleapis.com/v1beta/openai"
+api_key_env = "GEMINI_API_KEY"
+# Testing phase on free keys: gemini-3.8 / 3.7-flash time out and Pro is paid-only (checked 2026-11-01 with
+# the project's free keys). 3.5-flash answers in 3-5 s with tool calling; 3.6-flash is newer but 4-13 s,
+# past first_token_timeout_ms. When real paid keys arrive, try gemini-3.8-flash (or a Pro model) here.
+models = { cheap = "gemini-3.5-flash-lite", expensive = "gemini-3.5-flash" }
+# Free-tier limits are per project and only shown in AI Studio; these are conservative placeholders.
+# NOTE: on the free tier, Google uses content to improve its products -> only public/synthetic data.
+limits = { rpm = 10, rpd = 250, tpm = 250000 }
+price_in_per_m = 0.30      # flash-lite; gemini-3.8-flash is 0.75 / 3.75 (until 2026-12-31, then 1.50 / 7.50)
+price_out_per_m = 2.50
+free = true
+first_token_timeout_ms = 8000
+
+[[providers]]
+name = "openrouter"
+base_url = "https://openrouter.ai/api/v1"
+api_key_env = "OPENROUTER_API_KEY"
+# Free variants with tool-calling support (needed by the agent path).
+models = { cheap = "google/gemma-4-26b-a4b-it:free", expensive = "nvidia/nemotron-3-ultra-550b-a55b:free" }
+# OpenRouter `:free` models: 20 RPM and 50 RPD (1,000 RPD after a one-time $10 credit purchase).
+limits = { rpm = 20, rpd = 50 }
+price_in_per_m = 0.09      # paid gemma-4-26b variant; nemotron-3-ultra is 0.60 / 2.40
+price_out_per_m = 0.30
+free = true
+first_token_timeout_ms = 10000

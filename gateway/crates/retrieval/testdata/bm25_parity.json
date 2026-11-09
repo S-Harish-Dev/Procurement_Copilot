@@ -1,0 +1,129 @@
+[
+ {
+  "query": "Who has to approve a purchase request of USD 15,000?",
+  "indices": [
+   251112200,
+   327841461,
+   697303812,
+   1979157630,
+   2064885619,
+   2074087043
+  ]
+ },
+ {
+  "query": "What is the hotel cap per night in tier-1 cities?",
+  "indices": [
+   330588669,
+   497409497,
+   931871199,
+   1275986279,
+   1810453357,
+   1966288579,
+   1989892411
+  ]
+ },
+ {
+  "query": "When is first article testing and approval appropriate under FAR 9.302?",
+  "indices": [
+   327841461,
+   613148321,
+   1031294843,
+   1167338989,
+   1257441684,
+   1290213554,
+   1443829736,
+   2046049909
+  ]
+ },
+ {
+  "query": "What does clause 52.212-4 require?",
+  "indices": [
+   227488077,
+   516115046,
+   516830072,
+   754973205,
+   1965198687
+  ]
+ },
+ {
+  "query": "What is the renewal notice period in contract C-0007?",
+  "indices": [
+   209336618,
+   516762017,
+   1919690456,
+   1989632767,
+   2002423141,
+   2092953102
+  ]
+ },
+ {
+  "query": "Can I ignore the three-quote rule for emergency purchases??!",
+  "indices": [
+   251112200,
+   1273790862,
+   1296924235,
+   1463597126,
+   1838268055,
+   2073907658
+  ]
+ },
+ {
+  "query": "Procurement savings target FY2026 \u2014 6% of addressable spend",
+  "indices": [
+   456140477,
+   575623047,
+   670727360,
+   1039414772,
+   1572399708,
+   1982804121,
+   2132027491
+  ]
+ },
+ {
+  "query": "na\u00efve caf\u00e9 r\u00e9sum\u00e9 fa\u00e7ade co\u00f6perate",
+  "indices": [
+   586420412,
+   605818632,
+   756638508,
+   1681038935,
+   1700062636
+  ]
+ },
+ {
+  "query": "the and of to a in",
+  "indices": []
+ },
+ {
+  "query": "Running runners ran quickly; connections connected connecting",
+  "indices": [
+   243905464,
+   567658162,
+   771291085,
+   946033505,
+   1223115691
+  ]
+ },
+ {
+  "query": "IBAN payments, wire transfers & bank-detail changes (call-back)",
+  "indices": [
+   91242678,
+   272066790,
+   390564119,
+   569047032,
+   617246313,
+   632657554,
+   715590789,
+   823588779,
+   1702602635
+  ]
+ },
+ {
+  "query": "Supplier's taxpayer identification number",
+  "indices": [
+   1308688855,
+   1438070374,
+   1838611330,
+   1977029129
+  ]
+ }
+]

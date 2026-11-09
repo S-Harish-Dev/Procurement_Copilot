@@ -1,0 +1,80 @@
+// Gateway <-> brain contract. The gateway owns authentication, policy and every LLM call;
+// the brain runs the agent loop and talks to MCP servers on the user's behalf (OBO token).
+// W3C trace context travels in gRPC metadata (`traceparent`).
+syntax = "proto3";
+
+package brain.v1;
+
+service Brain {
+  // Agent run for an action intent (data lookup, create/approve requests). Streams progress.
+  rpc RunAgent(AgentRequest) returns (stream AgentEvent);
+  // Execute a proposal the user confirmed in the UI. No LLM involved: the brain calls the
+  // proposed tool with the one-time confirmation token minted by the gateway.
+  rpc ExecuteConfirmed(ConfirmRequest) returns (stream AgentEvent);
+  // Direct tool call for the UI (lists, details, approve/reject buttons). No LLM; same MCP servers,
+  // same OBO token, same OPA checks — and write tools still only return proposals.
+  rpc CallTool(ToolRequest) returns (ToolResponse);
+}
+
+message ToolRequest {
+  string request_id = 1;
+  string obo_token = 2;
+  string name = 3;
+  string args_json = 4;
+}
+
+message ToolResponse {
+  string result_json = 1;
+  bool ok = 2;
+}
+
+message Claims {
+  string sub = 1;
+  string name = 2;
+  string role = 3;
+  string dept = 4;
+  double spend_limit = 5;
+  double approval_limit = 6;
+}
+
+message Turn {
+  string role = 1;     // "user" | "assistant"
+  string content = 2;  // PII-masked
+}
+
+message AgentRequest {
+  string request_id = 1;
+  Claims claims = 2;
+  string scope_hash = 3;
+  string masked_query = 4;
+  repeated Turn history = 5;
+  string model_tier = 6;  // "cheap" | "expensive" (from the Jev router)
+  string obo_token = 7;   // 60 s RS256 JWT, aud=mcp
+  string intent = 8;
+}
+
+message ConfirmRequest {
+  string request_id = 1;
+  Claims claims = 2;
+  string proposal_id = 3;
+  string confirmation_token = 4;  // one-time HMAC token minted by the gateway
+  string obo_token = 5;
+}
+
+message AgentEvent {
+  oneof event {
+    Token token = 1;
+    ToolStarted tool_started = 2;
+    ToolResult tool_result = 3;
+    Proposal proposal = 4;
+    Final final = 5;
+    Error error = 6;
+  }
+}
+
+message Token { string text = 1; }
+message ToolStarted { string name = 1; string args_json = 2; }
+message ToolResult { string name = 1; string result_json = 2; bool ok = 3; }
+message Proposal { string proposal_id = 1; string action = 2; string summary_json = 3; }
+message Final { string text = 1; string status = 2; }  // status: done | proposal | denied | failed
+message Error { string message = 1; }

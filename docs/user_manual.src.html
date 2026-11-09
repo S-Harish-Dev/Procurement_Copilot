@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Procurement Copilot: User Manual</title>
+<!-- Source of ../user_manual.pdf. Rebuild: msedge/chrome --headless --no-pdf-header-footer --print-to-pdf=user_manual.pdf docs/user_manual.src.html -->
+<style>
+  @page { size: A4; margin: 22mm 18mm 22mm 18mm; @bottom-center { content: counter(page); font: 9pt Segoe UI, Arial, sans-serif; color: #667; } }
+  @page :first { margin: 0; @bottom-center { content: none; } }
+  * { box-sizing: border-box; }
+  body { font: 10.5pt/1.55 "Segoe UI", Arial, sans-serif; color: #1c2230; margin: 0; }
+  h1 { font-size: 20pt; color: #0f3d7a; border-bottom: 2px solid #256abf; padding-bottom: 4pt; margin: 0 0 12pt; break-before: page; }
+  h2 { font-size: 13.5pt; color: #0f3d7a; margin: 18pt 0 6pt; break-after: avoid; }
+  h3 { font-size: 11pt; margin: 12pt 0 4pt; break-after: avoid; }
+  p, li { orphans: 3; widows: 3; }
+  table { border-collapse: collapse; width: 100%; margin: 8pt 0 12pt; font-size: 9.8pt; break-inside: avoid; }
+  th, td { border: 1px solid #c9d1de; padding: 5pt 7pt; text-align: left; vertical-align: top; }
+  th { background: #eaf1fb; }
+  code { font: 9.5pt Consolas, monospace; background: #f1f3f7; padding: 1pt 4pt; border-radius: 3pt; }
+  .note, .tip, .warn { border: 1px solid; padding: 6pt 10pt; margin: 10pt 0; break-inside: avoid; border-radius: 4pt; }
+  .note { border-color: #256abf; background: #eef4fc; }
+  .tip  { border-color: #1b8a5a; background: #edf8f2; }
+  .warn { border-color: #c77700; background: #fff6e6; }
+  .flow { display: flex; gap: 6pt; margin: 10pt 0; break-inside: avoid; }
+  .flow div { flex: 1; border: 1px solid #256abf; border-radius: 6pt; padding: 6pt; text-align: center; font-size: 9.5pt; background: #f5f9ff; }
+  .flow b { display: block; color: #0f3d7a; }
+  .cover { height: 297mm; padding: 70mm 25mm 0; background: linear-gradient(160deg, #0f3d7a 0%, #256abf 100%); color: #fff; break-after: page; }
+  .cover h1 { color: #fff; border: 0; font-size: 36pt; break-before: auto; margin-bottom: 8pt; }
+  .cover p { font-size: 14pt; max-width: 130mm; opacity: .95; }
+  .cover small { position: absolute; bottom: 25mm; font-size: 10pt; opacity: .85; }
+  .toc { columns: 2; list-style: none; padding: 0; margin: 0; font-size: 11pt; }
+  .toc li { padding: 3pt 0; }
+</style></head><body>
+
+<div class="cover">
+  <h1>Procurement Copilot</h1>
+  <p>User manual: asking questions, raising purchase requests, approving spend and reading the admin dashboards.</p>
+  <small>For the Acme Corp demo environment · covers the web application at <code style="background:rgba(255,255,255,.18);color:#fff">http://localhost:3001</code></small>
+</div>
+
+<h1 style="break-before:auto">Contents</h1>
+<ol class="toc">
+  <li>1. What Procurement Copilot is</li><li>2. Signing in and roles</li>
+  <li>3. Asking questions in Chat</li><li>4. Understanding answers and citations</li>
+  <li>5. Raising a purchase request</li><li>6. My requests</li>
+  <li>7. Approving requests</li><li>8. Budgets</li>
+  <li>9. Admin Insights</li><li>10. Privacy, safety and what you will not see</li>
+  <li>11. Troubleshooting</li><li>12. Glossary</li>
+</ol>
+
+<h1>1. What Procurement Copilot is</h1>
+<p>Procurement Copilot is an assistant for Acme Corp's purchasing process. You can:</p>
+<ul>
+  <li><b>Ask questions</b> about procurement policy, vendor contracts and public procurement regulations (FAR, World Bank, UN) and get a short answer with <b>citations</b> to the source passages.</li>
+  <li><b>Raise purchase requests</b> in plain language. The assistant prepares the request; <b>nothing is submitted until you press Confirm</b>.</li>
+  <li><b>Track and approve</b> requests through the company's approval chain, and see department budgets.</li>
+</ul>
+<div class="note"><b>Your role decides what you can see.</b> Two people can ask the same question and receive different answers, because the assistant only uses documents their role is allowed to read.</div>
+
+<h1>2. Signing in and roles</h1>
+<p>Open the application and go to the sign-in page. In the demo environment you sign in by choosing a persona card; no password is needed. Your session lasts as long as the browser tab is open, and closing the tab signs you out.</p>
+<table>
+  <tr><th>Persona</th><th>Role</th><th>What the role can do</th></tr>
+  <tr><td>Priya Sharma (IT), Marcus Lee (Marketing)</td><td>Employee</td><td>Ask questions, raise and track own requests, see own department budget</td></tr>
+  <tr><td>James Chen (IT)</td><td>Manager</td><td>Everything an employee can, plus approve requests from their department</td></tr>
+  <tr><td>Elena Petrova</td><td>Finance</td><td>Approve requests above USD 10,000; broader visibility of spend and finance documents</td></tr>
+  <tr><td>Olivia Grant</td><td>Administrator</td><td>Approve requests above USD 100,000; open the Insights dashboards</td></tr>
+</table>
+<p>The navigation bar shows only the pages your role may open. Use the theme button to switch between light and dark mode, and sign out from the menu when you are done.</p>
+
+<h1>3. Asking questions in Chat</h1>
+<p>Open <b>Chat</b> and type your question in the box at the bottom, then press <b>Send</b>. The answer streams in as it is written. Good questions are specific:</p>
+<ul>
+  <li>“What is the hotel nightly cap for domestic travel?”</li>
+  <li>“Who has to approve a USD 12,000 software purchase?”</li>
+  <li>“What does our contract with &lt;vendor&gt; say about termination?”</li>
+  <li>“How does the FAR define a micro-purchase?”</li>
+</ul>
+<h2>Controls</h2>
+<table>
+  <tr><th>Control</th><th>What it does</th></tr>
+  <tr><td>Send</td><td>Submit your question</td></tr>
+  <tr><td>Stop answering</td><td>Cancel an answer that is still streaming</td></tr>
+  <tr><td>Regenerate answer</td><td>Ask the assistant to answer the same question again</td></tr>
+  <tr><td>Copy answer</td><td>Copy the answer text to the clipboard</td></tr>
+  <tr><td>Helpful / Not helpful</td><td>Send feedback on an answer so it can be reviewed</td></tr>
+  <tr><td>Conversations panel</td><td>Switch between earlier conversations, start a new one, archive or delete</td></tr>
+</table>
+<div class="tip"><b>Tip:</b> conversations are stored in <i>your browser</i> (up to 30 per user), not on the server. Clearing site data or using another browser starts you with an empty history.</div>
+
+<h1>4. Understanding answers and citations</h1>
+<p>Every factual answer carries numbered <b>citation chips</b>. Select one to open the source panel and read the exact passage the answer is based on, with the document title. Always check the source for decisions that matter.</p>
+<p>While the assistant works you may see small <b>tool chips</b>, for example “Looked up …” for read-only lookups. Chips that say “Prepared … for your review” mean the assistant has drafted a change that still needs your confirmation (see chapter 5).</p>
+<h2>When there is no answer</h2>
+<p>If the assistant has no information, it says so in a standard message. This happens when:</p>
+<ul>
+  <li>the topic is not in the document set,</li>
+  <li>the documents that cover it are not visible to your role, or</li>
+  <li>the request was blocked by a safety check.</li>
+</ul>
+<div class="note">These cases deliberately look identical, so the message never reveals whether a restricted document exists. If you believe you should have access, ask your manager or an administrator; do not try rephrasing around it.</div>
+
+<h1>5. Raising a purchase request</h1>
+<p>Describe what you need in Chat, including what, how much, which vendor if known, and why. Example: “I need to buy 10 laptops from Dell for the new analysts, about USD 15,000.” The assistant gathers any missing details and shows an <b>action card</b> with the proposed request.</p>
+<div class="flow">
+  <div><b>1 Describe</b>say what you need</div>
+  <div><b>2 Review</b>check the action card</div>
+  <div><b>3 Confirm</b>or Cancel</div>
+  <div><b>4 Approval</b>routed by amount</div>
+  <div><b>5 Order</b>PO PDF + e-mails</div>
+</div>
+<div class="warn"><b>Nothing happens until you press Confirm.</b> Cancel discards the proposal. A confirmation works once and only for the exact request shown; if you change anything, review a new card.</div>
+<h2>Who must approve</h2>
+<p>Approval levels are cumulative and collected in order, from the lowest level up.</p>
+<table>
+  <tr><th>Request amount (USD)</th><th>Approvals required</th></tr>
+  <tr><td>Up to 1,000</td><td>Automatic</td></tr>
+  <tr><td>Above 1,000 to 10,000</td><td>Department manager</td></tr>
+  <tr><td>Above 10,000 to 100,000</td><td>Department manager, then Finance</td></tr>
+  <tr><td>Above 100,000</td><td>Department manager, then Finance, then Administrator</td></tr>
+</table>
+<p>You cannot approve your own request, and one person approves only one level of a request. A rejection at any level ends the workflow; you can revise and resubmit, which restarts at the first level. When the last approval is given, a purchase-order PDF is generated and notification e-mails are sent (in the demo they appear in Mailpit at <code>http://localhost:8025</code>).</p>
+
+<h1>6. My requests</h1>
+<p><b>Requests</b> lists every purchase request you raised. Use the <b>status filter</b> to narrow the list. Select a request to open its detail page, which shows:</p>
+<ul>
+  <li>the items, vendor, amount and justification,</li>
+  <li>the <b>approval chain</b>: each step, who must act, and whether it is pending, approved or rejected,</li>
+  <li>the status history, and the purchase order once the request is approved.</li>
+</ul>
+
+<h1>7. Approving requests</h1>
+<p>Managers, Finance and Administrators have an <b>Approvals</b> page listing requests waiting for their action. Filter by role or status to focus the list.</p>
+<ol>
+  <li>Open a request and read the details and the approval chain.</li>
+  <li>Press <b>Approve</b> or <b>Reject</b>. You can add an optional comment, which the requester will see (the default is “Approved” or “Rejected”).</li>
+  <li>Confirm. As with proposals, the action uses a one-time confirmation and is recorded with your name.</li>
+</ol>
+<div class="note">You only see requests you are allowed to act on, and the step you can act on is the one currently waiting for your role. Later steps unlock after earlier ones approve.</div>
+
+<h1>8. Budgets</h1>
+<p><b>Budgets</b> shows the budget for your department: total, amount spent on approved and ordered requests, and what remains. Monthly bars show spending over time; a month with no spending appears as a zero bar. Finance and Administrators can see more departments. Asking for a department you cannot see is refused.</p>
+
+<h1>9. Admin Insights</h1>
+<p>Administrators have an <b>Insights</b> area. It is hidden from other roles, and the server refuses access to everyone else.</p>
+<table>
+  <tr><th>Page</th><th>What it shows</th></tr>
+  <tr><td>Overview</td><td>Traffic, answer sources, cache hits by layer, model calls and fallbacks, guardrail activity, actual versus “shadow” cost, and the Jev budget. Needs Prometheus; without it the page says the metrics store is not reachable.</td></tr>
+  <tr><td>Evals</td><td>Latest retrieval, red-team, agent and cache-isolation results, with pass/fail against hard gates</td></tr>
+  <tr><td>Experiments</td><td>Recorded design experiments (embedders, fusion, index settings, thresholds)</td></tr>
+  <tr><td>Traces</td><td>Per-request waterfall of gateway stages; open one by request id to see where time went and why a request was blocked</td></tr>
+</table>
+<p>Each chart has a <b>Table</b> view, <b>Raw JSON</b> and <b>CSV</b> download, plus an “ⓘ How to read this” note.</p>
+<p>Any user can open the account menu and choose <b>Compare what another role sees</b>, which returns to the sign-in page so you can switch persona and ask the same question again.</p>
+
+<h1>10. Privacy, safety and what you will not see</h1>
+<ul>
+  <li><b>Role-based access:</b> retrieval filters documents by your permissions before anything is ranked or shown.</li>
+  <li><b>Masked data:</b> personal data is masked before text is sent to any external language model.</li>
+  <li><b>Prompt-injection protection:</b> attempts to override the assistant's instructions are blocked silently; repeated attempts add strikes to your account: from 3 strikes within 24 hours your requests are slowed down, and from 10 every request gets the standard message until an administrator resets the strikes.</li>
+  <li><b>Human in the loop:</b> only a person pressing Confirm or Approve can create or change a request.</li>
+</ul>
+<div class="warn">This demo environment contains <b>synthetic data only</b>. Do not type real personal, customer or confidential information into it, especially when free-tier model providers are configured.</div>
+
+<h1>11. Troubleshooting</h1>
+<table>
+  <tr><th>Symptom</th><th>Likely cause and what to do</th></tr>
+  <tr><td>“The assistant is temporarily unavailable”</td><td>The language-model providers or the search index are unreachable or rate-limited. Wait a minute and retry; common questions may still answer from cache.</td></tr>
+  <tr><td>Answers take 15 to 20 seconds</td><td>Free-tier providers are slow at times. Paid keys remove the limit.</td></tr>
+  <tr><td>“No information” for something you expect to exist</td><td>It may be outside your role's access, or not in the document set. Ask your manager or an administrator.</td></tr>
+  <tr><td>Signed out suddenly</td><td>Your session expired or the tab was closed. Sign in again.</td></tr>
+  <tr><td>Conversation history is gone</td><td>History is kept per browser; clearing site data or switching browsers resets it.</td></tr>
+  <tr><td>No Approvals or Insights in the menu</td><td>Your role does not include them.</td></tr>
+  <tr><td>Insights overview shows “metrics store is not reachable”</td><td>Prometheus is not running (it is skipped in the lean laptop setup). Start the full stack with <code>make up</code>.</td></tr>
+  <tr><td>Page blank on <code>127.0.0.1</code></td><td>Use <code>http://localhost:3001</code>, or add the host to <code>allowedDevOrigins</code> in <code>web/next.config.ts</code>.</td></tr>
+</table>
+
+<h1>12. Glossary</h1>
+<table>
+  <tr><th>Term</th><th>Meaning</th></tr>
+  <tr><td>Action card</td><td>A proposed change (for example a new purchase request) shown for you to confirm or cancel</td></tr>
+  <tr><td>Citation</td><td>A numbered link from an answer to the source passage it used</td></tr>
+  <tr><td>Approval chain</td><td>The ordered list of approvers a request needs, based on its amount</td></tr>
+  <tr><td>PO</td><td>Purchase order: the PDF generated once a request is fully approved</td></tr>
+  <tr><td>RAG</td><td>Retrieval-augmented generation: search the documents first, then answer from what was found</td></tr>
+  <tr><td>Jev</td><td>The routing and relevance-checking service the gateway uses; if it is unavailable the system runs in a simpler degraded mode</td></tr>
+  <tr><td>Degraded mode</td><td>A reduced but safe way of working when a dependency is down</td></tr>
+  <tr><td>Shadow cost</td><td>What the same traffic would cost with no cache and no router, used to judge savings</td></tr>
+</table>
+<p style="margin-top:18pt;color:#667;font-size:9pt">For installation and operations see the README and the runbook in <code>docs/handbook/05-runbook.md</code>.</p>
+</body></html>

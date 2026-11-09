@@ -1,0 +1,10 @@
+# Prometheus that scrapes the gateway (infra/prometheus). Fixed uid: the generated dashboards use it.
+apiVersion: 1
+datasources:
+  - name: Gateway Prometheus
+    uid: gateway-prom
+    type: prometheus
+    access: proxy
+    url: ${PROMETHEUS_URL}
+    isDefault: false
+    editable: false

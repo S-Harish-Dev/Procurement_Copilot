@@ -1,0 +1,258 @@
+@import "tailwindcss";
+
+/* Theme: the OS setting by default; the toggle stamps data-theme on <html> and wins both ways. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/*
+ * Design tokens. Chart colours are the dataviz reference palette verbatim (validated light and dark,
+ * see NOTES-M8.md); the categorical order is fixed and entities map to slots in lib/palette.ts.
+ */
+:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --surface-2: #f0efec;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #898781;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --border: rgba(11, 11, 11, 0.1);
+  --focus: #2a78d6;
+  /* Button fill: sequential step 500 keeps white text >= 4.5:1 in both modes. */
+  --btn: #256abf;
+  --btn-hover: #1c5cab;
+
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --series-5: #e87ba4;
+  --series-6: #008300;
+  --series-7: #6250d6;
+  --series-8: #e34948;
+  --other: #b4b2a9;
+
+  --seq-250: #86b6ef;
+  --seq-400: #3987e5;
+  --seq-550: #1c5cab;
+
+  --status-good: #0ca30c;
+  --status-warning: #fab219;
+  --status-serious: #ec835a;
+  --status-critical: #d03b3b;
+  --success-text: #006300;
+  --danger-text: #b42323;
+  /* Text tones for tinted status fills (all >= 4.5:1 on their soft background). */
+  --warn-text: #7a4f00;
+  --serious-text: #9a3d12;
+  --info-text: #1c5cab;
+  --violet-text: #5040b8;
+  /* Strength of the sign-in backdrop glow; dark surfaces need more to read at all. */
+  --glow: 1.5;
+  /* Light-only tuning of the sign-in backdrop: calmer teal/rose, a white spotlight behind the headline,
+     no dot grid (dots read as dirt on a light page). Dark sets these back to its own values. */
+  --glow-alt: 0.7;
+  --spot: 1;
+  --dots: 0;
+}
+
+/* Soft status fills: a tint of the status hue over whatever surface the theme sets. */
+:root {
+  --good-soft: color-mix(in srgb, var(--status-good) 13%, var(--surface));
+  --warn-soft: color-mix(in srgb, var(--status-warning) 20%, var(--surface));
+  --serious-soft: color-mix(in srgb, var(--status-serious) 17%, var(--surface));
+  --crit-soft: color-mix(in srgb, var(--status-critical) 12%, var(--surface));
+  --info-soft: color-mix(in srgb, var(--series-1) 12%, var(--surface));
+  --violet-soft: color-mix(in srgb, var(--series-7) 13%, var(--surface));
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --surface-2: #262624;
+    --ink: #f0efec;
+    --ink-2: #c3c2b7;
+    --muted: #898781;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --border: rgba(255, 255, 255, 0.1);
+    --focus: #3987e5;
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-4: #c98500;
+    --series-5: #d55181;
+    --series-6: #008300;
+    --series-7: #9085e9;
+    --series-8: #e66767;
+    --other: #5f5e59;
+    --seq-250: #6da7ec;
+    --seq-400: #3987e5;
+    --seq-550: #184f95;
+    --success-text: #3fcf3f;
+    --danger-text: #f08a8a;
+    --warn-text: #f2c14e;
+    --serious-text: #f4a583;
+    --info-text: #8db8f0;
+    --violet-text: #b3abf2;
+    --glow: 2;
+    --glow-alt: 1;
+    --spot: 0;
+    --dots: 1;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface: #1a1a19;
+  --surface-2: #262624;
+  --ink: #f0efec;
+  --ink-2: #c3c2b7;
+  --muted: #898781;
+  --grid: #2c2c2a;
+  --axis: #383835;
+  --border: rgba(255, 255, 255, 0.1);
+  --focus: #3987e5;
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --series-5: #d55181;
+  --series-6: #008300;
+  --series-7: #9085e9;
+  --series-8: #e66767;
+  --other: #5f5e59;
+  --seq-250: #6da7ec;
+  --seq-400: #3987e5;
+  --seq-550: #184f95;
+  --success-text: #3fcf3f;
+  --danger-text: #f08a8a;
+  --warn-text: #f2c14e;
+  --serious-text: #f4a583;
+  --info-text: #8db8f0;
+  --violet-text: #b3abf2;
+  --glow: 2;
+  --glow-alt: 1;
+  --spot: 0;
+  --dots: 1;
+}
+
+@theme inline {
+  --color-page: var(--page);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-grid: var(--grid);
+  --color-line: var(--border);
+  --color-accent: var(--series-1);
+  --color-btn: var(--btn);
+  --color-btn-hover: var(--btn-hover);
+  --color-good: var(--status-good);
+  --color-warning: var(--status-warning);
+  --color-serious: var(--status-serious);
+  --color-critical: var(--status-critical);
+  --color-success-text: var(--success-text);
+  --color-danger-text: var(--danger-text);
+  --color-warn-text: var(--warn-text);
+  --color-serious-text: var(--serious-text);
+  --color-info-text: var(--info-text);
+  --color-violet-text: var(--violet-text);
+  --color-good-soft: var(--good-soft);
+  --color-warn-soft: var(--warn-soft);
+  --color-serious-soft: var(--serious-soft);
+  --color-crit-soft: var(--crit-soft);
+  --color-info-soft: var(--info-soft);
+  --color-violet-soft: var(--violet-soft);
+  --font-sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html,
+body {
+  background: var(--page);
+  color: var(--ink);
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Browser surfaces themed from the palette: selection, scrollbars. */
+::selection {
+  background: color-mix(in srgb, var(--series-1) 28%, transparent);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--axis) transparent;
+}
+
+/*
+ * Sign-in backdrop, two fixed layers so it fills the whole viewport at any scroll position and the page
+ * is never a void: ::before is a four-colour mesh (blue, violet, teal, rose, one in each corner region)
+ * with fine grain on top; ::after is a dot grid that fades toward the edges. All colours come from theme
+ * tokens, so light and dark follow on their own; --glow scales the mesh (higher on dark surfaces).
+ */
+.login-backdrop {
+  position: relative;
+  isolation: isolate;
+}
+.login-backdrop::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(48rem 20rem at 50% 15rem, color-mix(in srgb, #fff calc(72% * var(--spot)), transparent), transparent 72%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(62rem 40rem at 10% -6%, color-mix(in srgb, var(--series-1) calc(26% * var(--glow)), transparent), transparent 66%),
+    radial-gradient(54rem 36rem at 94% 8%, color-mix(in srgb, var(--series-7) calc(22% * var(--glow)), transparent), transparent 66%),
+    radial-gradient(58rem 38rem at 2% 98%, color-mix(in srgb, var(--series-3) calc(18% * var(--glow) * var(--glow-alt)), transparent), transparent 66%),
+    radial-gradient(50rem 32rem at 98% 100%, color-mix(in srgb, var(--series-5) calc(12% * var(--glow) * var(--glow-alt)), transparent), transparent 66%),
+    /* Final layer: a cool tint gives light mode a clean, airy base instead of warm grey (identical to --page in dark: --spot is 0). */
+    color-mix(in srgb, var(--series-1) calc(5% * var(--spot)), var(--page));
+}
+.login-backdrop::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(color-mix(in srgb, var(--ink) 30%, transparent) 1px, transparent 1.4px);
+  background-size: 28px 28px;
+  opacity: calc(0.5 * var(--dots));
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 20%, transparent 85%);
+}
+
+/* Calm entrance for panels that arrive after data loads; content is visible without it. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+.rise {
+  animation: rise 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

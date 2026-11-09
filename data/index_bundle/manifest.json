@@ -1,0 +1,42 @@
+{
+  "format_version": 1,
+  "created_at": "2026-10-30T14:58:22+00:00",
+  "versions": {
+    "parser": "docling-v1",
+    "chunker": "v1",
+    "embed": "nomic-ai/nomic-embed-text-v1.5|Qdrant/bm25|ctx-v1"
+  },
+  "primary_dense": "nomic-v1.5",
+  "sparse_model": "Qdrant/bm25",
+  "prompt_guard_2": false,
+  "counts": {
+    "documents": 175,
+    "chunks": 10356
+  },
+  "dense_models": {
+    "nomic-v1.5": {
+      "model": "nomic-ai/nomic-embed-text-v1.5",
+      "doc_prefix": "search_document: ",
+      "query_prefix": "search_query: ",
+      "dim": 768,
+      "file": "dense/nomic-v1.5.npy"
+    }
+  },
+  "files": {
+    "documents.jsonl": "f2d0fe6ac12091660f48c97f9258a19b8423771fde22042a9b0f4e2150ad8a02",
+    "chunks.jsonl": "87043fee928f683930ce2ebb27a13529626ef280a4b74429f33f11e080008066",
+    "sparse_bm25.jsonl": "538d194b842f621ed9675b5cf3bd2b1deb2740a2cfb77a9c4dd0984d14783bb4",
+    "dense/nomic-v1.5.npy": "6bec8d2c0ab13807e923422f71af4473027ea83f7eb77035e886925d180ff065"
+  },
+  "excluded_sources": [
+    "un",
+    "worldbank"
+  ],
+  "excluded_reason": "UN and World Bank terms of use do not allow redistribution; rebuild the full bundle with `make build-index`.",
+  "excluded_ablation_models": [
+    "nomic-v1.5-q",
+    "bge-small-v1.5",
+    "bge-base-v1.5"
+  ],
+  "excluded_ablation_note": "Experiment-only embedders; regenerate with `make ablation` on a big machine."
+}

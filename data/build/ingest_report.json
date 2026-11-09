@@ -1,0 +1,46 @@
+{
+  "versions": {
+    "parser": "docling-v1",
+    "chunker": "v1",
+    "embed": "nomic-ai/nomic-embed-text-v1.5|Qdrant/bm25|ctx-v1"
+  },
+  "documents": 177,
+  "documents_by_source": {
+    "far": 1,
+    "worldbank": 1,
+    "un": 1,
+    "cuad": 100,
+    "acme": 74
+  },
+  "chunks": 11322,
+  "chunks_by_source": {
+    "far": 5917,
+    "worldbank": 375,
+    "un": 591,
+    "cuad": 3609,
+    "acme": 830
+  },
+  "tokens_total": 2846640,
+  "pii_entities_docs_with_type": {
+    "EMAIL_ADDRESS": 89,
+    "PHONE_NUMBER": 60,
+    "PERSON": 1105,
+    "US_EIN": 31,
+    "IBAN_CODE": 30
+  },
+  "injection": {
+    "prompt_guard_2": "unavailable (regex-only)",
+    "chunks_flagged": 5,
+    "chunks_quarantined": 5,
+    "poisoned_docs": 5,
+    "poisoned_docs_missed": [],
+    "benign_docs_flagged": []
+  },
+  "timings": {
+    "parse_s": 0.0,
+    "chunk_mask_scan_s": 9.3,
+    "prompt_guard_s": 0.0,
+    "embed_s": 23.6,
+    "bundle_write_s": 0.8
+  }
+}

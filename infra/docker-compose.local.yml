@@ -1,0 +1,11 @@
+# Lean local overlay: real LLM providers (keys from .env), Jev degraded (no key), local model files bind-mounted.
+# Use:  docker compose --env-file .env -f infra/docker-compose.yml -f infra/docker-compose.local.yml up -d <services>
+services:
+  gateway:
+    environment:
+      OTEL_EXPORTER_OTLP_ENDPOINT: ""
+      FASTEMBED_CACHE_DIR: /app/models/fastembed
+    volumes:
+      - ../models:/app/models
+      # Provider/model choices are config: edit the file and recreate the gateway, no image rebuild.
+      - ../gateway/providers.toml:/app/gateway/providers.toml:ro

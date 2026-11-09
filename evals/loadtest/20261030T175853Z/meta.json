@@ -1,0 +1,3 @@
+{"run": "20261030T175853Z", "host": "master", "cores": 64,
+ "loadavg_before": "29.14 26.75 20.36", "duration": "60s",
+ "git_sha": "a44929d"}
