@@ -1,0 +1,17 @@
+# Retrieval evals need the index bundle and a running stack. Run them manually (Actions tab, "Run workflow")
+# on a self-hosted runner with Docker, or locally with `make eval-fast`.
+name: eval
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  eval-fast:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - run: make env keys up seed ingest
+      - run: docker compose --env-file .env -f infra/docker-compose.yml --profile offline up -d gateway mock-llm mock-llm-2
+      - run: make eval-fast

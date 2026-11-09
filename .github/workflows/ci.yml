@@ -1,10 +1,13 @@
-# CI: lint + unit tests (Python, Rust, OPA, web) on every push/PR. The same steps run locally with `make ci`;
-# the retrieval evals need the index bundle and a running stack, so they are manual (`workflow_dispatch`).
+# CI: lint + unit tests (Python, Rust, OPA, web) on every push/PR. The same steps run locally with `make ci`.
+# The retrieval evals need the index bundle and a running stack, so they live in eval.yml (manual).
 name: ci
 on:
   push: { branches: [main] }
   pull_request:
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   static-and-unit:
@@ -14,6 +17,12 @@ jobs:
       - uses: astral-sh/setup-uv@v6
       - uses: dtolnay/rust-toolchain@master
         with: { toolchain: "1.99.1", components: "clippy, rustfmt" }
+      - uses: Swatinem/rust-cache@v2
+        with: { workspaces: gateway }
+      - uses: actions/setup-node@v4
+        with: { node-version: "22", cache: npm, cache-dependency-path: web/package-lock.json }
+      - name: protoc (the gateway builds its gRPC client from proto/brain.proto)
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends protobuf-compiler
       - name: Install OPA
         run: |
           curl -fsSL -o /usr/local/bin/opa https://github.com/open-policy-agent/opa/releases/download/v1.22.0/opa_linux_amd64_static
@@ -22,16 +31,5 @@ jobs:
         run: |
           curl -fsSL https://github.com/microsoft/onnxruntime/releases/download/v1.31.1/onnxruntime-linux-x64-1.31.1.tgz | tar -xz -C /opt
           echo "ORT_DYLIB_PATH=/opt/onnxruntime-linux-x64-1.31.1/lib/libonnxruntime.so.1.31.1" >> "$GITHUB_ENV"
+      - run: make web-install
       - run: make ci
-
-  # Retrieval evals need the index bundle (built on a big machine, not in git): run on a self-hosted
-  # runner that has it, or manually. Same command as locally.
-  eval-fast:
-    if: github.event_name == 'workflow_dispatch'
-    runs-on: self-hosted
-    needs: static-and-unit
-    steps:
-      - uses: actions/checkout@v4
-      - run: make env keys up seed ingest
-      - run: docker compose --env-file .env -f infra/docker-compose.yml --profile offline up -d gateway mock-llm mock-llm-2
-      - run: make eval-fast
